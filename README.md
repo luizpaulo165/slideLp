@@ -19,9 +19,9 @@ Configurações
 ===============================
 
 O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar algumas funcionalidades.
-<table>
+<table width="100%">
 	<tr>
-		<td>Configurações Padrões</td>
+		<td colspan="3">Configurações Padrões</td>
 	</tr>
 	<tr>	
 		<td>Sintaxe</td>
