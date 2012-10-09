@@ -24,9 +24,9 @@ O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar alg
 		<td colspan="3">Configurações Padrões</td>
 	</tr>
 	<tr>	
-		<td>Sintaxe</td>
-		<td>Tipo</td>
-		<td>Descrição</td>
+		<td font color="#C9FF26">Sintaxe</td>
+		<td font color="#C9FF26">Tipo</td>
+		<td font color="#C9FF26">Descrição</td>
 	</tr>
 	<tr>	
 		<td>effects</td>
