@@ -11,7 +11,7 @@ $.fn.slideLp = function(options){
 		timeBanner: "3000",
 		timeDelay: "500",
 		pagination: false,
-		effects: "page" //or "slide","slide-vert","slide-hori","fade"
+		effects: "page" //or "slide", "fade"
 	}
 	options = $.extend(defaults, options);
 
