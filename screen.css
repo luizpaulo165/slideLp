@@ -1,0 +1,34 @@
+/* ------------------------------------
+	CSS Desenvolvido pela
+	Mostone | www.mostone.com.br
+   Author: Luiz Paulo Valença| luizpaulo165@gmail.com
+	Ultima Atualização: 08/10/2012
+	Alterado Por:
+
+	Favor não quebrar o código, caso precise atualizar-lo, favor use a mesma semântica.
+   Please not break this code, you need to change it, please use the same semantics. 
+------------------------------------ */
+/* =============================================================================
+   Reset
+   ========================================================================== */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small,strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,  caption, figure{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;vertical-align:baseline;text-decoration:none!important;outline: 0!important;}
+strong{font-weight:bold;}
+:focus{outline:0}
+body{font-family:Arial,Verdana,Tahoma,Helvetica, sans-serif;font-size:10px;background:url(../images/content/bg.gif) repeat center top;}
+ol, ul{list-style:none}
+table{border-collapse: separate;border-spacing:0}
+caption, th, td{text-align: left;font-weight: normal}
+blockquote:before, blockquote:after, q:before, q:after {content: ""}
+blockquote, q{ quotes: "" ""}
+/* =============================================================================
+   Base
+   ========================================================================== */
+::-moz-selection {background:#20202F;color:#fff;text-shadow:none}
+::-webkit-selection {background:#20202F;color:#fff;text-shadow:none}
+::-o-selection {background:#20202F;color:#fff;text-shadow:none}
+::-ms-selection {background:#20202F;color:#fff;text-shadow:none}
+::selection {background:#20202F;color:#fff;text-shadow:none}
+/* =============================================================================
+   Geral
+   ========================================================================== */
+   #highlight{background:red;width:960px;height:420px;padding:0px!important;position:relative;overflow:hidden;}
