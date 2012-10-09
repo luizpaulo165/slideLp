@@ -18,11 +18,20 @@ Como usar o plugin:
 Configurações
 ===============================
 
-O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar algumas funcionalidades. - Configurações Padrões:
+O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar algumas funcionalidades.
 <table>
+	<tr>
+		<td>Configurações Padrões</td>
+	</tr>
 	<tr>	
-		<td>auto</td>
-		<td>alkjflaksdjlfka</td>
+		<td>Sintaxe</td>
+		<td>Tipo</td>
+		<td>Descrição</td>
+	</tr>
+	<tr>	
+		<td>effects</td>
+		<td>String</td>
+		<td>Existem dois tipos de efeito: "Page", "Fade"</td>
 	</tr>
 </table>
 
