@@ -2,7 +2,7 @@ $(function(){
 	$("#highlight").slideLp({
 		auto: true,
 		timeBanner: "5000",
-		effects: "fade",
+		effects: "page",
 		pagination: true,
 		timeDelay: "200"
 	});

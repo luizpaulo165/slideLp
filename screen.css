@@ -31,4 +31,4 @@ blockquote, q{ quotes: "" ""}
 /* =============================================================================
    Geral
    ========================================================================== */
-   #highlight{background:red;width:960px;height:420px;padding:0px!important;position:relative;overflow:hidden;}
+   #highlight{width:960px;height:420px;border:1px solid #505050;margin:0 auto;padding:0px!important;position:relative;top:150px;overflow:hidden;}
