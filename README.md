@@ -1,4 +1,4 @@
-Slide Lp Highlight - Lib jQuery v1.0
+Slide Lp Highlight - Lib jQuery + HTML5 + CSS3 v1.0
 ===============================
 
 Este plugin está sendo desenvolvido para facilitar a vida de muitas pessoas que pretendem desenvolver um site e precisam de um banner de destaque.
