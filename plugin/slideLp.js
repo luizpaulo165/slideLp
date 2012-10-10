@@ -10,7 +10,7 @@ $.fn.slideLp = function(options){
 		auto: true,
 		timeBanner: "3000",
 		timeDelay: "500",
-		pagination: false,
+		pagination: true,
 		effects: "page" //or "slide", "fade"
 	}
 	options = $.extend(defaults, options);
