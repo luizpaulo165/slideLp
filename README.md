@@ -42,6 +42,7 @@ Html base do plugin:
 	</section><!-- highlight -->
 
 Chamada base do plugin:
+
 	$(function(){
 		$("#highlight").slideLp();
 	});
