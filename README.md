@@ -10,10 +10,10 @@ Como usar
 
 Como usar o plugin:
 
-1 - Você deve fazer o download do plugin;
-2 - Descompatar;
-3 - Dentro da pasta, acesse a pasta que possui o nome de "plugin", dentro dela estão dos os aquivos nessesários para o funcionamento do slideLp;
-4 - Por fim, basta apenas adicionar os arquivos no seu projeto e pronto!
+	1 - Você deve fazer o download do plugin;
+	2 - Descompatar;
+	3 - Dentro da pasta, acesse a pasta que possui o nome de "plugin", dentro dela estão dos os aquivos nessesários para o funcionamento do slideLp;
+	4 - Por fim, basta apenas adicionar os arquivos no seu projeto e pronto!
 
 HTML base e Chamada js
 ===============================
