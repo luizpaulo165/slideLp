@@ -15,6 +15,16 @@ Como usar o plugin:
 	3 - Dentro da pasta, acesse a pasta que possui o nome de "plugin", dentro dela estão dos os aquivos nessesários para o funcionamento do slideLp;
 	4 - Por fim, basta apenas adicionar os arquivos no seu projeto e pronto!
 
+OBS Importante!
+===============================
+
+O slideLp foi feito usando tags HTML5, portanto alguns navegadores que não possuem essa tecnologia não conseguiram interpretar as tags, um exemplo pratico seria no IE7 ou IE8 onde os navegadores não possuem suporte a Html5, com isso o plugin não iria funcionar corretamente. Para resolver esse problemas usamos dois plugins js, são eles: 
+
+	 - Modernizr: Para mais informações acesse o site http://www.modernizr.com/;
+	 - html5.js;
+
+ Aplicando esses dois js fará com que os navegadores mais antigos consigam interpretar as novas tags do Html5.
+
 HTML base e Chamada js
 ===============================
 
