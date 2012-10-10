@@ -23,7 +23,7 @@ O slideLp foi feito usando tags HTML5, portanto alguns navegadores que não poss
 	 - Modernizr: Para mais informações acesse o site <a href="http://www.modernizr.com/">http://www.modernizr.com/</a>;
 	 - html5.js;
 
- Aplicando esses dois js fará com que os navegadores mais antigos consigam interpretar as novas tags do Html5.
+ Aplicando esses dois js fará com que os navegadores mais antigos consigam interpretar as novas tags do Html5. Os mesmo encontram-se na pasta "html5-js" dentro da pasta do projeto.
 
 HTML base e Chamada js
 ===============================
