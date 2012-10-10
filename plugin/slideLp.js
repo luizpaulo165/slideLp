@@ -64,7 +64,7 @@ $.fn.slideLp = function(options){
 				/*=====================================================
 					auto
 				======================================================*/
-				function anima(){
+				function animaPage(){
 					var $self = $(".pagHighlight .active");
 
 					if($self.next().length == "0"){
@@ -91,11 +91,11 @@ $.fn.slideLp = function(options){
 				}
 				//auto
 				if(options.auto){
-					time = setInterval(anima, options.timeBanner);
+					time = setInterval(animaPage, options.timeBanner);
 
 					$(".pagHighlight a").click(function(){
 						time = clearInterval(time);
-						time = setInterval(anima, options.timeBanner);
+						time = setInterval(animaPage, options.timeBanner);
 					});
 				}
 			break;
@@ -135,7 +135,7 @@ $.fn.slideLp = function(options){
 				/*=====================================================
 					auto
 				======================================================*/
-				function anima(){
+				function animaFade(){
 					var $self = $(".pagHighlight .active");
 
 					if($self.next().length == "0"){
@@ -160,11 +160,11 @@ $.fn.slideLp = function(options){
 				//auto
 				if(options.auto){
 					//hover
-					time = setInterval(anima, options.timeBanner);
+					time = setInterval(animaFade, options.timeBanner);
 
 					$(".pagHighlight a").click(function(){
 						time = clearInterval(time);
-						time = setInterval(anima, options.timeBanner);
+						time = setInterval(animaFade, options.timeBanner);
 					});
 				}
 			break;
