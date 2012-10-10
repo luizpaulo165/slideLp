@@ -42,18 +42,20 @@ Html base do plugin:
 	</section><!-- highlight -->
 
 Chamada base do plugin:
-
-- $("#highlight").slideLp();
+	$(function(){
+		$("#highlight").slideLp();
+	});
 
 Chamada usando as configurações do plugin:
 
-- $("#highlight").slideLp({
-	auto: true,
-	timeBanner: "3000",
-	timeDelay: "500",
-	pagination: true,
-	effects: "page"
-  });
+ 	$(function(){
+		$("#highlight").slideLp({
+			auto: true,
+			timeBanner: "5000",
+			effects: "page",
+			timeDelay: "200"
+		});
+	});
 
 Configurações
 ===============================
