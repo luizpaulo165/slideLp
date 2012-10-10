@@ -20,7 +20,7 @@ OBS Importante!
 
 O slideLp foi feito usando tags HTML5, portanto alguns navegadores que não possuem essa tecnologia não conseguiram interpretar as tags, um exemplo pratico seria no IE7 ou IE8 onde os navegadores não possuem suporte a Html5, com isso o plugin não iria funcionar corretamente. Para resolver esse problemas usamos dois plugins js, são eles: 
 
-	 - Modernizr: Para mais informações acesse o site http://www.modernizr.com/;
+	 - Modernizr: Para mais informações acesse o site <a href="http://www.modernizr.com/">http://www.modernizr.com/</a>;
 	 - html5.js;
 
  Aplicando esses dois js fará com que os navegadores mais antigos consigam interpretar as novas tags do Html5.
