@@ -23,8 +23,8 @@ $.fn.slideLp = function(options){
 ======================================================*/
 if(options.pagination){
 	var $pages = '<nav class="pagHighlight">';
-	$this.find(".listCont li").each(function(dataPosition){
-		$pages += '<a href="javascript:void()" data-position='+ dataPosition +'></a>\n';
+	$.each($this.find(".listCont li"),function(index){
+		$pages += '<a href="javascript:void()" data-position='+ index +'></a>\n';
 	});
 	$pages += "</nav>";
 	//add before section wrapHighlight
@@ -47,9 +47,35 @@ if(options.navButtons){
 	//action nextButton
 	$(".nextButton").bind({
 		click: function(){
-			alert(0)
+			var $self = $(".pagHighlight .active");
+
+			if($self.next().length == "0"){
+				$(".pagHighlight a:last").removeClass("active");
+				$(".pagHighlight a:first").addClass("active").click();
+			}
+
+			$self.next().addClass("active").click().prev().removeClass("active");
+
+			return false;
 		}
 	});
+
+	//action prevButton
+	$(".prevButton").bind({
+		click: function(){
+			var $self = $(".pagHighlight .active");
+
+			if($self.prev().length == "0"){
+				$(".pagHighlight a:first").removeClass("active");
+				$(".pagHighlight a:last").addClass("active").click();
+			}
+
+			$self.prev().addClass("active").click().next().removeClass("active");
+
+			return false;
+		}
+	});
+
 }else{	
 	null;
 }
