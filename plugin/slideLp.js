@@ -11,9 +11,40 @@ $.fn.slideLp = function(options){
 		timeBanner: "3000",
 		timeDelay: "500",
 		pagination: true,
+		navButtons: true,
+		prevName: "prev",
+		nextName: "next",
 		effects: "page" //or "slide", "fade"
 	}
 	options = $.extend(defaults, options);
+
+/*=====================================================
+	pagination
+======================================================*/
+if(options.pagination){
+	var pages = '<nav class="pagHighlight">';
+	$(".wrapHighlight .listCont li").each(function(dataPosition, value){
+
+		console.log(dataPosition);
+		console.log(value);
+		pages += '<a href="javascript:void()" data-position='+ dataPosition +'></a>\n';
+	});
+	pages += "</nav>";
+	//add before section wrapHighlight
+	$(".wrapHighlight").append(pages);
+	$(".pagHighlight a:first").addClass("active");
+}else{
+	null;
+}
+
+/*=====================================================
+	navButtons
+======================================================*/
+if(options.navButtons){
+
+}else{	
+	null;
+}
 
 /*=====================================================
 	effects
