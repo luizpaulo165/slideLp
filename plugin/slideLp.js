@@ -12,8 +12,8 @@ $.fn.slideLp = function(options){
 		timeDelay: "500",
 		pagination: true,
 		navButtons: true,
-		prevName: "prev",
-		nextName: "next",
+		prevName: "<",
+		nextName: ">",
 		effects: "page" //or "slide", "fade"
 	}
 	options = $.extend(defaults, options);
@@ -22,16 +22,13 @@ $.fn.slideLp = function(options){
 	pagination
 ======================================================*/
 if(options.pagination){
-	var pages = '<nav class="pagHighlight">';
-	$(".wrapHighlight .listCont li").each(function(dataPosition, value){
-
-		console.log(dataPosition);
-		console.log(value);
-		pages += '<a href="javascript:void()" data-position='+ dataPosition +'></a>\n';
+	var $pages = '<nav class="pagHighlight">';
+	$this.find(".listCont li").each(function(dataPosition){
+		$pages += '<a href="javascript:void()" data-position='+ dataPosition +'></a>\n';
 	});
-	pages += "</nav>";
+	$pages += "</nav>";
 	//add before section wrapHighlight
-	$(".wrapHighlight").append(pages);
+	$this.append($pages);
 	$(".pagHighlight a:first").addClass("active");
 }else{
 	null;
@@ -41,7 +38,18 @@ if(options.pagination){
 	navButtons
 ======================================================*/
 if(options.navButtons){
+	var $prevButton = '<a href="javascript:void()" class="prevButton">'+ options.prevName +'</a>';
+	var $nextButton = '<a href="javascript:void()" class="nextButton">'+ options.nextName +'</a>';
+	//add buttons in html
+	$this.append($prevButton);
+	$this.append($nextButton);
 
+	//action nextButton
+	$(".nextButton").bind({
+		click: function(){
+			alert(0)
+		}
+	});
 }else{	
 	null;
 }
