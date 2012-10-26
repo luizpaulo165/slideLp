@@ -20,6 +20,16 @@ $.fn.slideLp = function(options){
 	options = $.extend(defaults, options);
 
 /*=====================================================
+	Geral
+======================================================*/
+	var $heightThis = $this.height();
+	var $widthThis = $this.width();
+
+	$(".wrapHighlight").css({
+		width: ""+ $widthThis +"px",
+		height: ""+ $heightThis +"px"
+	});
+/*=====================================================
 	pagination
 ======================================================*/
 if(options.pagination){
