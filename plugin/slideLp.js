@@ -11,11 +11,12 @@ $.fn.slideLp = function(options){
 		timeBanner: 3000,
 		timeDelay: 500,
 		timeDelayIn: 500,
+		timeDelayOut: 700,
 		pagination: true,
 		navButtons: true,
 		prevName: "<",
 		nextName: ">",
-		effects: "pageCenter" //"pageHoriz", "slide", "fade", "pageVert"
+		effects: "fade" //"pageHoriz", "slide", "fade", "pageVert"
 	}
 	options = $.extend(defaults, options);
 
@@ -96,6 +97,75 @@ if(options.navButtons){
 ======================================================*/
 	function motion(effects){
 		switch(effects){
+			case 'fade':
+				/*=====================================================
+					fade
+				======================================================*/
+				//vars
+				var $listCont = $this.children(".listCont");
+				var $li = $listCont.find("li");
+				var $liCont = $li.find(".cont");
+				var $pagHighlihgt = $this.children(".pagHighlight");
+				var $linkPag = $pagHighlihgt.find("a");
+
+				$listCont.find("li:first").addClass("active");
+				$listCont.find("li:first .cont").css("width","100%");
+				$listCont.find("li").css("display","none");
+				$listCont.find("li:first").css("display","block");
+
+				$linkPag.bind({
+					click: function(){
+						var $self = $(this);
+						var $selfPosition = $self.data("position");
+
+						$linkPag.removeClass("active")
+						$self.addClass("active");
+
+						$li.fadeOut(options.timeDelayOut).removeClass("active");
+
+						$listCont.find("li[data-position="+ $selfPosition +"] .cont").css("width","100%");
+						$listCont.find("li[data-position="+ $selfPosition +"]").fadeIn(options.timeDelayIn).addClass("active");
+					
+						return false;
+					}
+				});
+				/*=====================================================
+					auto
+				======================================================*/
+				function animaFade(){
+					var $self = $(".pagHighlight .active");
+
+					if($self.next().length == "0"){
+						$(".pagHighlight a:last").removeClass("active");
+						$(".pagHighlight a:first").addClass("active");
+					}
+
+					$self.next().addClass("active").prev().removeClass("active");
+
+					var $selfPosition = $(".pagHighlight .active").data("position");
+
+					$li.fadeOut(options.timeDelayOut).removeClass("active");
+
+					$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
+						width: "100%",
+						display: "block"
+					});
+					$listCont.find("li[data-position="+ $selfPosition +"]").fadeIn(options.timeDelayIn).addClass("active");
+
+					return false;
+				}
+				//auto
+				if(options.auto){
+					//hover
+					time = setInterval(animaFade, options.timeBanner);
+
+					$(".pagHighlight a").click(function(){
+						time = clearInterval(time);
+						time = setInterval(animaFade, options.timeBanner);
+					});
+				}
+			break;
+
 			case 'pageHoriz':
 				/*=====================================================
 					pageHoriz
@@ -172,75 +242,6 @@ if(options.navButtons){
 					$(".pagHighlight a").click(function(){
 						time = clearInterval(time);
 						time = setInterval(animaPageHoriz, options.timeBanner);
-					});
-				}
-			break;
-
-			case 'fade':
-				/*=====================================================
-					fade
-				======================================================*/
-				//vars
-				var $listCont = $this.children(".listCont");
-				var $li = $listCont.find("li");
-				var $liCont = $li.find(".cont");
-				var $pagHighlihgt = $this.children(".pagHighlight");
-				var $linkPag = $pagHighlihgt.find("a");
-
-				$listCont.find("li:first").addClass("active");
-				$listCont.find("li:first .cont").css("width","100%");
-				$listCont.find("li").css("display","none");
-				$listCont.find("li:first").css("display","block");
-
-				$linkPag.bind({
-					click: function(){
-						var $self = $(this);
-						var $selfPosition = $self.data("position");
-
-						$linkPag.removeClass("active")
-						$self.addClass("active");
-
-						$li.fadeOut(options.timeBanner).removeClass("active");
-
-						$listCont.find("li[data-position="+ $selfPosition +"] .cont").css("width","100%");
-						$listCont.find("li[data-position="+ $selfPosition +"]").delay(options.timeDelay).fadeIn(options.timeDelayIn).addClass("active");
-					
-						return false;
-					}
-				});
-				/*=====================================================
-					auto
-				======================================================*/
-				function animaFade(){
-					var $self = $(".pagHighlight .active");
-
-					if($self.next().length == "0"){
-						$(".pagHighlight a:last").removeClass("active");
-						$(".pagHighlight a:first").addClass("active");
-					}
-
-					$self.next().addClass("active").prev().removeClass("active");
-
-					var $selfPosition = $(".pagHighlight .active").data("position");
-
-					$li.fadeOut(options.timeBanner).removeClass("active");
-
-					$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
-						width: "100%",
-						display: "block"
-					});
-					$listCont.find("li[data-position="+ $selfPosition +"]").delay(options.timeDelay).fadeIn(options.timeDelayIn).addClass("active");
-
-					return false;
-				}
-				//auto
-				if(options.auto){
-					//hover
-					time = setInterval(animaFade, options.timeBanner);
-
-					$(".pagHighlight a").click(function(){
-						time = clearInterval(time);
-						time = setInterval(animaFade, options.timeBanner);
 					});
 				}
 			break;
