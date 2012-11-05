@@ -16,6 +16,9 @@ $.fn.slideLp = function(options){
 		navButtons: true,
 		prevName: "<",
 		nextName: ">",
+		paginationThumb: true,
+		thumbSizeWidth: "150px",
+		thumbSizeHeight: "100px",
 		effects: "fade" //"pageHoriz", "slide", "fade", "pageVert"
 	}
 	options = $.extend(defaults, options);
@@ -35,17 +38,45 @@ $.fn.slideLp = function(options){
 ======================================================*/
 if(options.pagination){
 	var $pages = '<nav class="pagHighlight">';
+	var $contBanner = $this.find(".listCont li .cont").html();
+
 	$.each($this.find(".listCont li"),function(index){
-		$pages += '<a href="javascript:void()" data-position='+ index +'></a>\n';
+		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
 	});
 	$pages += "</nav>";
 	//add before section wrapHighlight
-	$this.append($pages);
+	$this.parent().append($pages);
 	$(".pagHighlight a:first").addClass("active");
 }else{
 	null;
 }
-
+/*=====================================================
+	paginationThumb
+======================================================*/
+if(options.paginationThumb){
+	$(".pagHighlight").css({
+		height: options.thumbSizeHeight
+	});
+	$(".pagHighlight a").css({
+		textIndent: "0",
+		textAlign: "center",
+		width: options.thumbSizeWidth,
+		height: options.thumbSizeHeight,
+		"border-radius": "0",
+		"-moz-border-radius": "0",
+		"-webkit-border-radius": "0",
+		"-o-border-radius": "0",
+		"-ms-border-radius": "0"
+	});
+	$(".pagHighlight a *").css({
+		textIndent: "0",
+		textAlign: "center",
+		width: "100%",
+		height: "100%"
+	});
+}else{
+	null;
+}
 /*=====================================================
 	navButtons
 ======================================================*/
@@ -53,8 +84,8 @@ if(options.navButtons){
 	var $prevButton = '<a href="javascript:void()" class="prevButton">'+ options.prevName +'</a>';
 	var $nextButton = '<a href="javascript:void()" class="nextButton">'+ options.nextName +'</a>';
 	//add buttons in html
-	$this.append($prevButton);
-	$this.append($nextButton);
+	$this.parent().append($prevButton);
+	$this.parent().append($nextButton);
 
 	//action nextButton
 	$(".nextButton").bind({
@@ -105,8 +136,7 @@ if(options.navButtons){
 				var $listCont = $this.children(".listCont");
 				var $li = $listCont.find("li");
 				var $liCont = $li.find(".cont");
-				var $pagHighlihgt = $this.children(".pagHighlight");
-				var $linkPag = $pagHighlihgt.find("a");
+				var $linkPag = $(".pagHighlight a");
 
 				$listCont.find("li:first").addClass("active");
 				$listCont.find("li:first .cont").css("width","100%");
@@ -174,8 +204,7 @@ if(options.navButtons){
 				var $listCont = $this.children(".listCont");
 				var $li = $listCont.find("li");
 				var $liCont = $li.find(".cont");
-				var $pagHighlihgt = $this.children(".pagHighlight");
-				var $linkPag = $pagHighlihgt.find("a");
+				var $linkPag = $(".pagHighlight a");
 				i = 10;
 				j = 10;
 
@@ -254,8 +283,7 @@ if(options.navButtons){
 			var $listCont = $this.children(".listCont");
 			var $li = $listCont.find("li");
 			var $liCont = $li.find(".cont");
-			var $pagHighlihgt = $this.children(".pagHighlight");
-			var $linkPag = $pagHighlihgt.find("a");
+			var $linkPag = $(".pagHighlight a");
 			i = 10;
 			j = 10;
 
@@ -332,109 +360,6 @@ if(options.navButtons){
 				$(".pagHighlight a").click(function(){
 					time = clearInterval(time);
 					time = setInterval(animaPageVert, options.timeBanner);
-				});
-			}
-			break;
-
-			case 'pageCenter':
-			//vars
-			var $listCont = $this.children(".listCont");
-			var $li = $listCont.find("li");
-			var $liCont = $li.find(".cont");
-			var $pagHighlihgt = $this.children(".pagHighlight");
-			var $linkPag = $pagHighlihgt.find("a");
-			i = 10;
-			j = 10;
-
-			$listCont.find("li .cont").css({
-				width: "100%",
-				height: "100%",
-				margin: "0 auto",
-				top: "50%",
-				left: "-1px",
-				"border": "1px solid #CCCCCC",
-				"box-shadow": "0 0px 5px #000000",
-				"-mozbox-shadow": "0 0px 5px #000000",
-				"-webkit-box-shadow": "0 0px 5px #000000",
-				"-o-box-shadow": "0 0px 5px #000000",
-				"-ms-box-shadow": "0 0px 5px #000000"
-			});
-
-			$listCont.find("li:first .cont").css({
-				height: "100%",
-				top: "-1px",
-				left: "-1px"
-			});
-
-			$li.each(function(e){
-				$(this).css("z-index", --j)
-			});
-
-			$linkPag.bind({
-				click: function(){
-					var $self = $(this);
-					var $selfPosition = $self.data("position");
-
-					$linkPag.removeClass("active")
-					$self.addClass("active");
-
-					$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
-						width: "0%",
-						height: "0%",
-						top: "50%"
-					});
-
-					$li.removeClass("active");
-
-					$listCont.find("li[data-position="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
-					$listCont.find("li[data-position="+ $selfPosition +"] .cont").stop(true,true).animate({
-						width: "100%",
-						height: "100%",
-						top: "-1px"
-					},options.timeDelay);
-
-					return false;
-				}
-			});
-			/*=====================================================
-				auto
-			======================================================*/
-			function animaPageCenter(){
-				var $self = $(".pagHighlight .active");
-
-				if($self.next().length == "0"){
-					$(".pagHighlight a:last").removeClass("active");
-					$(".pagHighlight a:first").addClass("active");
-				}
-
-				$self.next().addClass("active").prev().removeClass("active");
-
-				var $selfPosition = $(".pagHighlight .active").data("position");
-
-				$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
-						width: "0%",
-						height: "0%",
-						top: "50%"
-					});
-
-					$li.removeClass("active");
-
-					$listCont.find("li[data-position="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
-					$listCont.find("li[data-position="+ $selfPosition +"] .cont").stop(true,true).animate({
-						width: "100%",
-						height: "100%",
-						top: "-1px"
-					},options.timeDelay);
-
-				return false;
-			}
-			//auto
-			if(options.auto){
-				time = setInterval(animaPageCenter, options.timeBanner);
-
-				$(".pagHighlight a").click(function(){
-					time = clearInterval(time);
-					time = setInterval(animaPageCenter, options.timeBanner);
 				});
 			}
 			break;
