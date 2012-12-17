@@ -48,7 +48,20 @@ if(options.pagination){
 	$this.parent().append($pages);
 	$(".pagHighlight a:first").addClass("active");
 }else{
-	null;
+	var $pages = '<nav class="pagHighlight">';
+	var $contBanner = $this.find(".listCont li .cont").html();
+
+	$.each($this.find(".listCont li"),function(index){
+		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
+	});
+	$pages += "</nav>";
+	//add before section wrapHighlight
+	$this.parent().append($pages);
+	$(".pagHighlight a:first").addClass("active");
+
+	$(".pagHighlight").css({
+		display: "none"
+	});
 }
 /*=====================================================
 	paginationThumb
