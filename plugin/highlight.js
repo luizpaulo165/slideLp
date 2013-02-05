@@ -8,5 +8,6 @@ $(function(){
 		paginationThumb: false,
 		thumbSizeWidth: "50px",
 		thumbSizeHeight: "35px",
+		pagination: false
 	});
 });
