@@ -10,6 +10,7 @@ $.fn.slideLp = function(options){
 		auto: true,
 		timeBanner: 3000,
 		timeDelay: 500,
+		timeSlide: 500,
 		timeDelayIn: 500,
 		timeDelayOut: 700,
 		pagination: true,
@@ -19,7 +20,7 @@ $.fn.slideLp = function(options){
 		paginationThumb: false,
 		thumbSizeWidth: "150px",
 		thumbSizeHeight: "100px",
-		effects: "pageVert" //"pageHoriz", "slide", "fade", "pageVert"
+		effects: "slide" //"pageHoriz", "slide", "fade", "pageVert"
 	}
 	options = $.extend(defaults, options);
 
@@ -373,6 +374,119 @@ if(options.navButtons){
 				$(".pagHighlight a").click(function(){
 					time = clearInterval(time);
 					time = setInterval(animaPageVert, options.timeBanner);
+				});
+			}
+			break;
+
+			case 'slide':
+			/*=====================================================
+				Slide
+			======================================================*/
+			//vars
+			var $listCont = $this.children(".listCont");
+			var $li = $listCont.find("li");
+			var $liCont = $li.find(".cont");
+			var $linkPag = $(".pagHighlight a");
+
+			$liCont.css({
+				width: "100%",
+				height: "100%"
+			});	
+
+			$li.css({
+				float: "left",
+				position: "relative",
+				width: $this.width()
+			});
+
+			//width $listCont
+			var $liLenghtWidth = $listCont.find("li").outerWidth();
+			var $widthUl = $liLenghtWidth * $li.length;
+
+			$listCont.css({
+				width: $widthUl + "px"
+			});
+
+			$listCont.find("li:first").addClass("active");
+
+			$linkPag.bind({
+				click: function(){
+					var $self = $(this);
+					var $selfPosition = $self.data("position");
+
+					$linkPag.removeClass("active")
+					$self.addClass("active");
+
+					$listCont.find("li.active").animate({
+						right: "0px"
+					},options.timeSlide);
+
+					$li.removeClass("active");
+					$listCont.find("li[data-position="+ $selfPosition +"]").addClass("active");
+
+					var $positionActive = $listCont.find("li.active").position();
+
+					console.log($positionActive.left)
+
+					$li.animate({
+						left: "-="+ $positionActive.left +"px"
+					},options.timeSlide);
+
+					// $listCont.find("li").each(function(){
+					// 	var $self = $(this);
+
+					// 	if($self.hasClass("active")){
+					// 		$self.animate({
+					// 			right: "0px"
+					// 		},options.timeSlide);
+					// 	}else{
+					// 		$self.removeClass("active").animate({
+					// 			right: "+"+ $this.outerWidth() +"px"
+					// 		},options.timeSlide);
+					// 		$self.delay(options.timeSlide).animate({
+					// 			right: "-"+ $this.outerWidth() +"px"
+					// 		});
+					// 	}
+					// });
+
+					return false;
+				}
+			});
+			/*=====================================================
+				auto
+			======================================================*/
+			function animaSlide(){
+				var $self = $(".pagHighlight .active");
+
+				if($self.next().length == "0"){
+					$(".pagHighlight a:last").removeClass("active");
+					$(".pagHighlight a:first").addClass("active");
+				}
+
+				$self.next().addClass("active").prev().removeClass("active");
+
+				var $selfPosition = $(".pagHighlight .active").data("position");
+
+				$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
+					height: "0%"
+				});
+
+				$li.removeClass("active");
+
+				$listCont.find("li[data-position="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
+				$listCont.find("li[data-position="+ $selfPosition +"] .cont").stop(true,true).animate({
+					height: "100%"
+				},options.timeDelay);
+
+				return false;
+			}
+			//auto
+			if(options.auto){
+				time = setInterval(animaSlide, options.timeBanner);
+
+				$(".pagHighlight a").click(function(){
+					time = clearInterval(time);
+					time = setInterval(animaSlide, options.timeBanner);
 				});
 			}
 			break;
