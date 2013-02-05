@@ -5,7 +5,7 @@ $(function(){
 		timeDelay: 1000,
 		timeDelayIn: 1000,
 		timeDelayOut: 1500,
-		paginationThumb: true,
+		paginationThumb: false,
 		thumbSizeWidth: "50px",
 		thumbSizeHeight: "35px",
 	});

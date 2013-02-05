@@ -16,10 +16,10 @@ $.fn.slideLp = function(options){
 		navButtons: true,
 		prevName: "<",
 		nextName: ">",
-		paginationThumb: true,
+		paginationThumb: false,
 		thumbSizeWidth: "150px",
 		thumbSizeHeight: "100px",
-		effects: "fade" //"pageHoriz", "slide", "fade", "pageVert"
+		effects: "pageVert" //"pageHoriz", "slide", "fade", "pageVert"
 	}
 	options = $.extend(defaults, options);
 
