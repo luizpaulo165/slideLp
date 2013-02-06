@@ -10,7 +10,7 @@ $.fn.slideLp = function(options){
 		auto: true,
 		timeBanner: 3000,
 		timeDelay: 500,
-		timeSlide: 500,
+		timeSlide: 800,
 		timeDelayIn: 500,
 		timeDelayOut: 700,
 		pagination: true,
@@ -417,37 +417,14 @@ if(options.navButtons){
 					$linkPag.removeClass("active")
 					$self.addClass("active");
 
-					$listCont.find("li.active").animate({
-						right: "0px"
-					},options.timeSlide);
-
 					$li.removeClass("active");
 					$listCont.find("li[data-position="+ $selfPosition +"]").addClass("active");
 
 					var $positionActive = $listCont.find("li.active").position();
 
-					console.log($positionActive.left)
-
-					$li.animate({
+					$listCont.find("li").animate({
 						left: "-="+ $positionActive.left +"px"
 					},options.timeSlide);
-
-					// $listCont.find("li").each(function(){
-					// 	var $self = $(this);
-
-					// 	if($self.hasClass("active")){
-					// 		$self.animate({
-					// 			right: "0px"
-					// 		},options.timeSlide);
-					// 	}else{
-					// 		$self.removeClass("active").animate({
-					// 			right: "+"+ $this.outerWidth() +"px"
-					// 		},options.timeSlide);
-					// 		$self.delay(options.timeSlide).animate({
-					// 			right: "-"+ $this.outerWidth() +"px"
-					// 		});
-					// 	}
-					// });
 
 					return false;
 				}
@@ -466,17 +443,13 @@ if(options.navButtons){
 				$self.next().addClass("active").prev().removeClass("active");
 
 				var $selfPosition = $(".pagHighlight .active").data("position");
+				var $positionActive = $listCont.find("li[data-position="+ $selfPosition +"]").position();
 
-				$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
-					height: "0%"
-				});
+				console.log($positionActive)
 
-				$li.removeClass("active");
-
-				$listCont.find("li[data-position="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
-				$listCont.find("li[data-position="+ $selfPosition +"] .cont").stop(true,true).animate({
-					height: "100%"
-				},options.timeDelay);
+				$listCont.find("li").animate({
+					left: "-="+ $positionActive.left +"px"
+				},options.timeSlide);
 
 				return false;
 			}

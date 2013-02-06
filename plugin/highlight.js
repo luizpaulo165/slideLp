@@ -1,8 +1,8 @@
 $(function(){
 	$("#highlight").slideLp({
-		auto: false,
+		auto: true,
 		timeBanner: 5000,
-		timeDelay: 1000,
+		timeDelay: 800,
 		timeDelayIn: 1000,
 		timeDelayOut: 1500,
 		paginationThumb: false,
