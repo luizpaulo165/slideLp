@@ -15,6 +15,7 @@ $.fn.slideLp = function(options){
 		timeDelayOut: 700,
 		pagination: true,
 		navButtons: true,
+		keyboard: false,
 		prevName: "<",
 		nextName: ">",
 		paginationThumb: false,
@@ -134,6 +135,36 @@ if(options.navButtons){
 	});
 
 }else{	
+	null;
+}
+if(options.keyboard){
+	//action keyboard
+	$(window).keydown(function(e){
+		if (e.which == 39) {
+     		var $self = $(".pagHighlight .active");
+
+			if($self.next().length == "0"){
+				$(".pagHighlight a:last").removeClass("active");
+				$(".pagHighlight a:first").addClass("active").click();
+			}
+
+			$self.next().addClass("active").click().prev().removeClass("active");
+
+			return false;
+   		}else if(e.which == 37){
+   			var $self = $(".pagHighlight .active");
+
+			if($self.prev().length == "0"){
+				$(".pagHighlight a:first").removeClass("active");
+				$(".pagHighlight a:last").addClass("active").click();
+			}
+
+			$self.prev().addClass("active").click().next().removeClass("active");
+
+			return false;
+   		}
+	});
+}else{
 	null;
 }
 
@@ -422,7 +453,7 @@ if(options.navButtons){
 
 					var $positionActive = $listCont.find("li.active").position();
 
-					$listCont.find("li").animate({
+					$listCont.find("li").stop(true,true).animate({
 						left: "-="+ $positionActive.left +"px"
 					},options.timeSlide);
 
@@ -447,7 +478,7 @@ if(options.navButtons){
 
 				console.log($positionActive)
 
-				$listCont.find("li").animate({
+				$listCont.find("li").stop(true,true).animate({
 					left: "-="+ $positionActive.left +"px"
 				},options.timeSlide);
 
