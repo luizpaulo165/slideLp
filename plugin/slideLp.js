@@ -15,7 +15,8 @@ $.fn.slideLp = function(options){
 		timeDelayOut: 700,
 		pagination: true,
 		navButtons: true,
-		keyboard: false,
+		keyboard: true,
+		touch: true,
 		prevName: "<",
 		nextName: ">",
 		paginationThumb: false,
@@ -24,7 +25,6 @@ $.fn.slideLp = function(options){
 		effects: "slide" //"pageHoriz", "slide", "fade", "pageVert"
 	}
 	options = $.extend(defaults, options);
-
 /*=====================================================
 	Geral
 ======================================================*/
@@ -164,10 +164,50 @@ if(options.keyboard){
 			return false;
    		}
 	});
+
 }else{
 	null;
 }
 
+//action touch
+if(options.touch){
+
+	var hammer = new Hammer(document.getElementById("container"));
+
+	$this.find(".wrapHighlight ul li").bind("dragstart", function() { 
+        return false; 
+    });
+
+	hammer.onswipe = function(ev){
+		// determine which direction we need to show the preview
+	    if (ev.direction == "left") {
+	  		var $self = $(".pagHighlight .active");
+
+			if($self.next().length == "0"){
+				$(".pagHighlight a:last").removeClass("active");
+				$(".pagHighlight a:first").addClass("active").click();
+			}
+
+			$self.next().addClass("active").click().prev().removeClass("active");
+
+			return false;	
+	      }else if (ev.direction == "right") {
+	  		var $self = $(".pagHighlight .active");
+
+			if($self.prev().length == "0"){
+				$(".pagHighlight a:first").removeClass("active");
+				$(".pagHighlight a:last").addClass("active").click();
+			}
+
+			$self.prev().addClass("active").click().next().removeClass("active");
+
+			return false;	
+	      }
+	}
+   
+}else{
+	null;
+}
 /*=====================================================
 	effects
 ======================================================*/
