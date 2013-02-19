@@ -42,13 +42,49 @@ if(options.pagination){
 	var $pages = '<nav class="pagHighlight">';
 	var $contBanner = $this.find(".listCont li .cont").html();
 
-	$.each($this.find(".listCont li"),function(index){
+	/*=====================================================
+	paginationThumb
+	======================================================*/
+	if(options.paginationThumb){
+
+		$.each($this.find(".listCont li"),function(index){
 		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
-	});
-	$pages += "</nav>";
-	//add before section wrapHighlight
-	$this.parent().append($pages);
-	$(".pagHighlight a:first").addClass("active");
+		});
+		$pages += "</nav>";
+		//add before section wrapHighlight
+		$this.parent().append($pages);
+		$(".pagHighlight a:first").addClass("active");
+
+
+		$(".pagHighlight").css({
+			height: options.thumbSizeHeight
+		});
+		$(".pagHighlight a").css({
+			textIndent: "0",
+			textAlign: "center",
+			width: options.thumbSizeWidth,
+			height: options.thumbSizeHeight,
+			"border-radius": "0",
+			"-moz-border-radius": "0",
+			"-webkit-border-radius": "0",
+			"-o-border-radius": "0",
+			"-ms-border-radius": "0"
+		});
+		$(".pagHighlight a *").css({
+			textIndent: "0",
+			textAlign: "center",
+			width: "100%",
+			height: "100%"
+		});
+	}else{
+		$.each($this.find(".listCont li"),function(index){
+		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ index +'</a>\n';
+		});
+		$pages += "</nav>";
+		//add before section wrapHighlight
+		$this.parent().append($pages);
+		$(".pagHighlight a:first").addClass("active");
+	}
 }else{
 	var $pages = '<nav class="pagHighlight">';
 	var $contBanner = $this.find(".listCont li .cont").html();
@@ -64,33 +100,6 @@ if(options.pagination){
 	$(".pagHighlight").css({
 		display: "none"
 	});
-}
-/*=====================================================
-	paginationThumb
-======================================================*/
-if(options.paginationThumb){
-	$(".pagHighlight").css({
-		height: options.thumbSizeHeight
-	});
-	$(".pagHighlight a").css({
-		textIndent: "0",
-		textAlign: "center",
-		width: options.thumbSizeWidth,
-		height: options.thumbSizeHeight,
-		"border-radius": "0",
-		"-moz-border-radius": "0",
-		"-webkit-border-radius": "0",
-		"-o-border-radius": "0",
-		"-ms-border-radius": "0"
-	});
-	$(".pagHighlight a *").css({
-		textIndent: "0",
-		textAlign: "center",
-		width: "100%",
-		height: "100%"
-	});
-}else{
-	null;
 }
 /*=====================================================
 	navButtons
