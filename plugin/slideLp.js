@@ -17,6 +17,9 @@ $.fn.slideLp = function(options){
 		navButtons: true,
 		keyboard: true,
 		touch: true,
+		thresholdX: 100,
+		thresholdY: 100,
+		touchName: "",
 		prevName: "<",
 		nextName: ">",
 		paginationThumb: false,
@@ -46,7 +49,6 @@ if(options.pagination){
 	paginationThumb
 	======================================================*/
 	if(options.paginationThumb){
-
 		$.each($this.find(".listCont li"),function(index){
 		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
 		});
@@ -179,40 +181,102 @@ if(options.keyboard){
 }
 
 //action touch
+var $thisWrap = $this.parent();
 if(options.touch){
+    $thisWrap.each(function () {
+    	var originalCoord = {
+	        x: 0,
+	        y: 0
+	    }
+	    var finalCoord = {
+	        x: 0,
+	        y: 0
+	    }
+		function touchStart(event) {
+	        originalCoord.x = event.targetTouches[0].pageX
+	        originalCoord.y = event.targetTouches[0].pageY
+	    }
 
-	var hammer = new Hammer(document.getElementById("container"));
+	    function touchMove(event) {
+	        event.preventDefault();
+	        finalCoord.x = event.targetTouches[0].pageX
+	        finalCoord.y = event.targetTouches[0].pageY
+	    }
 
-	$this.find(".wrapHighlight ul li").bind("dragstart", function() { 
-        return false; 
+	    function touchEnd(event) {
+	        var changeY = originalCoord.y - finalCoord.y;
+	        if (changeY < options.thresholdY && changeY > (options.thresholdY * -1)) {
+	            changeX = originalCoord.x - finalCoord.x;
+	            if (changeX > options.thresholdX) {
+	                var $self = $(".pagHighlight .active");
+
+					if($self.next().length == "0"){
+						$(".pagHighlight a:last").removeClass("active");
+						$(".pagHighlight a:first").addClass("active").click();
+					}
+
+					$self.next().addClass("active").click().prev().removeClass("active");
+
+	            }
+	            if (changeX < (options.thresholdX * -1)) {
+	                var $self = $(".pagHighlight .active");
+
+					if($self.prev().length == "0"){
+						$(".pagHighlight a:first").removeClass("active");
+						$(".pagHighlight a:last").addClass("active").click();
+					}
+
+					$self.prev().addClass("active").click().next().removeClass("active");
+	            }
+	        }
+	    }
+
+	    function touchStart(event) {
+	        originalCoord.x = event.targetTouches[0].pageX
+	        originalCoord.y = event.targetTouches[0].pageY
+	        finalCoord.x = originalCoord.x
+	        finalCoord.y = originalCoord.y
+	    }
+
+	    function touchCancel(event) {}
+	    this.addEventListener("touchstart", touchStart, false);
+	    this.addEventListener("touchmove", touchMove, false);
+	    this.addEventListener("touchend", touchEnd, false);
+	    this.addEventListener("touchcancel", touchCancel, false);
     });
+	
 
-	hammer.onswipe = function(ev){
-		// determine which direction we need to show the preview
-	    if (ev.direction == "left") {
-	  		var $self = $(".pagHighlight .active");
+	// var hammer = new Hammer(document.getElementById(options.touchName));
 
-			if($self.next().length == "0"){
-				$(".pagHighlight a:last").removeClass("active");
-				$(".pagHighlight a:first").addClass("active").click();
-			}
+	// $this.find(".wrapHighlight ul li").bind("dragstart", function() { 
+ //        return false; 
+ //    });
 
-			$self.next().addClass("active").click().prev().removeClass("active");
+	// hammer.onswipe = function(ev){
+	// 	// determine which direction we need to show the preview
+	//     	if (ev.direction == "left") {
+	// 	  		var $self = $(".pagHighlight .active");
 
-			return false;	
-	      }else if (ev.direction == "right") {
-	  		var $self = $(".pagHighlight .active");
+	// 			if($self.next().length == "0"){
+	// 				$(".pagHighlight a:last").removeClass("active");
+	// 				$(".pagHighlight a:first").addClass("active").click();
+	// 			}
 
-			if($self.prev().length == "0"){
-				$(".pagHighlight a:first").removeClass("active");
-				$(".pagHighlight a:last").addClass("active").click();
-			}
+	// 			$self.next().addClass("active").click().prev().removeClass("active");
 
-			$self.prev().addClass("active").click().next().removeClass("active");
+	//       }else if (ev.direction == "right") {
+	// 	  		var $self = $(".pagHighlight .active");
 
-			return false;	
-	      }
-	}
+	// 			if($self.prev().length == "0"){
+	// 				$(".pagHighlight a:first").removeClass("active");
+	// 				$(".pagHighlight a:last").addClass("active").click();
+	// 			}
+
+	// 			$self.prev().addClass("active").click().next().removeClass("active");
+	//       }else if (ev.direction == "up" || ev.direction == "down") {
+	// 	  		null;
+	//       }
+	// }
    
 }else{
 	null;
@@ -524,8 +588,6 @@ if(options.touch){
 
 				var $selfPosition = $(".pagHighlight .active").data("position");
 				var $positionActive = $listCont.find("li[data-position="+ $selfPosition +"]").position();
-
-				console.log($positionActive)
 
 				$listCont.find("li").stop(true,true).animate({
 					left: "-="+ $positionActive.left +"px"
