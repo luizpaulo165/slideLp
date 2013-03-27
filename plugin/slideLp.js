@@ -1,14 +1,14 @@
 (function($){
 $.fn.slideLp = function(options){
 	//var selector
-	$this = $(this).children(".wrapHighlight");
+	$this = $(this).find(".wrapHighlight");
 
 /*=====================================================
 	options
 ======================================================*/
 	var defaults = {
 		auto: true,
-		timeBanner: 3000,
+		timeBanner: 7000,
 		timeDelay: 500,
 		timeSlide: 800,
 		timeDelayIn: 500,
@@ -25,7 +25,7 @@ $.fn.slideLp = function(options){
 		paginationThumb: false,
 		thumbSizeWidth: "150px",
 		thumbSizeHeight: "100px",
-		effects: "slide" //"pageHoriz", "slide", "fade", "pageVert"
+		effects: "fade" //"pageHoriz", "slide", "fade", "pageVert"
 	}
 	options = $.extend(defaults, options);
 /*=====================================================
@@ -55,13 +55,13 @@ if(options.pagination){
 		$pages += "</nav>";
 		//add before section wrapHighlight
 		$this.parent().append($pages);
-		$(".pagHighlight a:first").addClass("active");
+		$this.parent().find(".pagHighlight a:first").addClass("active");
 
 
-		$(".pagHighlight").css({
+		$this.parent().find(".pagHighlight").css({
 			height: options.thumbSizeHeight
 		});
-		$(".pagHighlight a").css({
+		$this.parent().find(".pagHighlight a").css({
 			textIndent: "0",
 			textAlign: "center",
 			width: options.thumbSizeWidth,
@@ -72,7 +72,7 @@ if(options.pagination){
 			"-o-border-radius": "0",
 			"-ms-border-radius": "0"
 		});
-		$(".pagHighlight a *").css({
+		$this.parent().find(".pagHighlight a *").css({
 			textIndent: "0",
 			textAlign: "center",
 			width: "100%",
@@ -85,7 +85,7 @@ if(options.pagination){
 		$pages += "</nav>";
 		//add before section wrapHighlight
 		$this.parent().append($pages);
-		$(".pagHighlight a:first").addClass("active");
+		$this.parent().find(".pagHighlight a:first").addClass("active");
 	}
 }else{
 	var $pages = '<nav class="pagHighlight">';
@@ -97,9 +97,9 @@ if(options.pagination){
 	$pages += "</nav>";
 	//add before section wrapHighlight
 	$this.parent().append($pages);
-	$(".pagHighlight a:first").addClass("active");
+	$this.parent().find(".pagHighlight a:first").addClass("active");
 
-	$(".pagHighlight").css({
+	$this.parent().find(".pagHighlight").css({
 		display: "none"
 	});
 }
@@ -114,13 +114,13 @@ if(options.navButtons){
 	$this.parent().append($nextButton);
 
 	//action nextButton
-	$(".nextButton").bind({
+	$this.parent().find(".nextButton").bind({
 		click: function(){
-			var $self = $(".pagHighlight .active");
+			var $self = $this.parent().find(".pagHighlight .active");
 
 			if($self.next().length == "0"){
-				$(".pagHighlight a:last").removeClass("active");
-				$(".pagHighlight a:first").addClass("active").click();
+				$this.parent().find(".pagHighlight a:last").removeClass("active");
+				$this.parent().find(".pagHighlight a:first").addClass("active").click();
 			}
 
 			$self.next().addClass("active").click().prev().removeClass("active");
@@ -130,13 +130,13 @@ if(options.navButtons){
 	});
 
 	//action prevButton
-	$(".prevButton").bind({
+	$this.parent().find(".prevButton").bind({
 		click: function(){
-			var $self = $(".pagHighlight .active");
+			var $self = $this.parent().find(".pagHighlight .active");
 
 			if($self.prev().length == "0"){
-				$(".pagHighlight a:first").removeClass("active");
-				$(".pagHighlight a:last").addClass("active").click();
+				$this.parent().find(".pagHighlight a:first").removeClass("active");
+				$this.parent().find(".pagHighlight a:last").addClass("active").click();
 			}
 
 			$self.prev().addClass("active").click().next().removeClass("active");
@@ -152,22 +152,22 @@ if(options.keyboard){
 	//action keyboard
 	$(window).keydown(function(e){
 		if (e.which == 39) {
-     		var $self = $(".pagHighlight .active");
+     		var $self = $this.parent().find(".pagHighlight .active");
 
 			if($self.next().length == "0"){
-				$(".pagHighlight a:last").removeClass("active");
-				$(".pagHighlight a:first").addClass("active").click();
+				$this.parent().find(".pagHighlight a:last").removeClass("active");
+				$this.parent().find(".pagHighlight a:first").addClass("active").click();
 			}
 
 			$self.next().addClass("active").click().prev().removeClass("active");
 
 			return false;
    		}else if(e.which == 37){
-   			var $self = $(".pagHighlight .active");
+   			var $self = $this.parent().find(".pagHighlight .active");
 
 			if($self.prev().length == "0"){
-				$(".pagHighlight a:first").removeClass("active");
-				$(".pagHighlight a:last").addClass("active").click();
+				$this.parent().find(".pagHighlight a:first").removeClass("active");
+				$this.parent().find(".pagHighlight a:last").addClass("active").click();
 			}
 
 			$self.prev().addClass("active").click().next().removeClass("active");
@@ -208,22 +208,22 @@ if(options.touch){
 	        if (changeY < options.thresholdY && changeY > (options.thresholdY * -1)) {
 	            changeX = originalCoord.x - finalCoord.x;
 	            if (changeX > options.thresholdX) {
-	                var $self = $(".pagHighlight .active");
+	                var $self = $this.parent().find(".pagHighlight .active");
 
 					if($self.next().length == "0"){
-						$(".pagHighlight a:last").removeClass("active");
-						$(".pagHighlight a:first").addClass("active").click();
+						$this.parent().find(".pagHighlight a:last").removeClass("active");
+						$this.parent().find(".pagHighlight a:first").addClass("active").click();
 					}
 
 					$self.next().addClass("active").click().prev().removeClass("active");
 
 	            }
 	            if (changeX < (options.thresholdX * -1)) {
-	                var $self = $(".pagHighlight .active");
+	                var $self = $this.parent().find(".pagHighlight .active");
 
 					if($self.prev().length == "0"){
-						$(".pagHighlight a:first").removeClass("active");
-						$(".pagHighlight a:last").addClass("active").click();
+						$this.parent().find(".pagHighlight a:first").removeClass("active");
+						$this.parent().find(".pagHighlight a:last").addClass("active").click();
 					}
 
 					$self.prev().addClass("active").click().next().removeClass("active");
@@ -255,21 +255,21 @@ if(options.touch){
 	// hammer.onswipe = function(ev){
 	// 	// determine which direction we need to show the preview
 	//     	if (ev.direction == "left") {
-	// 	  		var $self = $(".pagHighlight .active");
+	// 	  		var $self = $this.parent().find(".pagHighlight .active");
 
 	// 			if($self.next().length == "0"){
-	// 				$(".pagHighlight a:last").removeClass("active");
-	// 				$(".pagHighlight a:first").addClass("active").click();
+	// 				$this.parent().find(".pagHighlight a:last").removeClass("active");
+	// 				$this.parent().find(".pagHighlight a:first").addClass("active").click();
 	// 			}
 
 	// 			$self.next().addClass("active").click().prev().removeClass("active");
 
 	//       }else if (ev.direction == "right") {
-	// 	  		var $self = $(".pagHighlight .active");
+	// 	  		var $self = $this.parent().find(".pagHighlight .active");
 
 	// 			if($self.prev().length == "0"){
-	// 				$(".pagHighlight a:first").removeClass("active");
-	// 				$(".pagHighlight a:last").addClass("active").click();
+	// 				$this.parent().find(".pagHighlight a:first").removeClass("active");
+	// 				$this.parent().find(".pagHighlight a:last").addClass("active").click();
 	// 			}
 
 	// 			$self.prev().addClass("active").click().next().removeClass("active");
@@ -294,7 +294,7 @@ if(options.touch){
 				var $listCont = $this.children(".listCont");
 				var $li = $listCont.find("li");
 				var $liCont = $li.find(".cont");
-				var $linkPag = $(".pagHighlight a");
+				var $linkPag = $this.parent().find(".pagHighlight a");
 
 				$listCont.find("li:first").addClass("active");
 				$listCont.find("li:first .cont").css("width","100%");
@@ -321,16 +321,16 @@ if(options.touch){
 					auto
 				======================================================*/
 				function animaFade(){
-					var $self = $(".pagHighlight .active");
+					var $self = $this.parent().find(".pagHighlight .active");
 
 					if($self.next().length == "0"){
-						$(".pagHighlight a:last").removeClass("active");
-						$(".pagHighlight a:first").addClass("active");
+						$this.parent().find(".pagHighlight a:last").removeClass("active");
+						$this.parent().find(".pagHighlight a:first").addClass("active");
 					}
 
 					$self.next().addClass("active").prev().removeClass("active");
 
-					var $selfPosition = $(".pagHighlight .active").data("position");
+					var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
 
 					$li.fadeOut(options.timeDelayOut).removeClass("active");
 
@@ -347,7 +347,7 @@ if(options.touch){
 					//hover
 					time = setInterval(animaFade, options.timeBanner);
 
-					$(".pagHighlight a").click(function(){
+					$this.parent().find(".pagHighlight a").click(function(){
 						time = clearInterval(time);
 						time = setInterval(animaFade, options.timeBanner);
 					});
@@ -362,7 +362,7 @@ if(options.touch){
 				var $listCont = $this.children(".listCont");
 				var $li = $listCont.find("li");
 				var $liCont = $li.find(".cont");
-				var $linkPag = $(".pagHighlight a");
+				var $linkPag = $this.parent().find(".pagHighlight a");
 				i = 10;
 				j = 10;
 
@@ -398,16 +398,16 @@ if(options.touch){
 					auto
 				======================================================*/
 				function animaPageHoriz(){
-					var $self = $(".pagHighlight .active");
+					var $self = $this.parent().find(".pagHighlight .active");
 
 					if($self.next().length == "0"){
-						$(".pagHighlight a:last").removeClass("active");
-						$(".pagHighlight a:first").addClass("active");
+						$this.parent().find(".pagHighlight a:last").removeClass("active");
+						$this.parent().find(".pagHighlight a:first").addClass("active");
 					}
 
 					$self.next().addClass("active").prev().removeClass("active");
 
-					var $selfPosition = $(".pagHighlight .active").data("position");
+					var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
 
 					$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
 						width: "0%"
@@ -426,7 +426,7 @@ if(options.touch){
 				if(options.auto){
 					time = setInterval(animaPageHoriz, options.timeBanner);
 
-					$(".pagHighlight a").click(function(){
+					$this.parent().find(".pagHighlight a").click(function(){
 						time = clearInterval(time);
 						time = setInterval(animaPageHoriz, options.timeBanner);
 					});
@@ -441,7 +441,7 @@ if(options.touch){
 			var $listCont = $this.children(".listCont");
 			var $li = $listCont.find("li");
 			var $liCont = $li.find(".cont");
-			var $linkPag = $(".pagHighlight a");
+			var $linkPag = $this.parent().find(".pagHighlight a");
 			i = 10;
 			j = 10;
 
@@ -487,16 +487,16 @@ if(options.touch){
 				auto
 			======================================================*/
 			function animaPageVert(){
-				var $self = $(".pagHighlight .active");
+				var $self = $this.parent().find(".pagHighlight .active");
 
 				if($self.next().length == "0"){
-					$(".pagHighlight a:last").removeClass("active");
-					$(".pagHighlight a:first").addClass("active");
+					$this.parent().find(".pagHighlight a:last").removeClass("active");
+					$this.parent().find(".pagHighlight a:first").addClass("active");
 				}
 
 				$self.next().addClass("active").prev().removeClass("active");
 
-				var $selfPosition = $(".pagHighlight .active").data("position");
+				var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
 
 				$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
 					height: "0%"
@@ -515,7 +515,7 @@ if(options.touch){
 			if(options.auto){
 				time = setInterval(animaPageVert, options.timeBanner);
 
-				$(".pagHighlight a").click(function(){
+				$this.parent().find(".pagHighlight a").click(function(){
 					time = clearInterval(time);
 					time = setInterval(animaPageVert, options.timeBanner);
 				});
@@ -530,7 +530,7 @@ if(options.touch){
 			var $listCont = $this.children(".listCont");
 			var $li = $listCont.find("li");
 			var $liCont = $li.find(".cont");
-			var $linkPag = $(".pagHighlight a");
+			var $linkPag = $this.parent().find(".pagHighlight a");
 
 			$liCont.css({
 				width: "100%",
@@ -577,16 +577,16 @@ if(options.touch){
 				auto
 			======================================================*/
 			function animaSlide(){
-				var $self = $(".pagHighlight .active");
+				var $self = $this.parent().find(".pagHighlight .active");
 
 				if($self.next().length == "0"){
-					$(".pagHighlight a:last").removeClass("active");
-					$(".pagHighlight a:first").addClass("active");
+					$this.parent().find(".pagHighlight a:last").removeClass("active");
+					$this.parent().find(".pagHighlight a:first").addClass("active");
 				}
 
 				$self.next().addClass("active").prev().removeClass("active");
 
-				var $selfPosition = $(".pagHighlight .active").data("position");
+				var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
 				var $positionActive = $listCont.find("li[data-position="+ $selfPosition +"]").position();
 
 				$listCont.find("li").stop(true,true).animate({
@@ -599,7 +599,7 @@ if(options.touch){
 			if(options.auto){
 				time = setInterval(animaSlide, options.timeBanner);
 
-				$(".pagHighlight a").click(function(){
+				$this.parent().find(".pagHighlight a").click(function(){
 					time = clearInterval(time);
 					time = setInterval(animaSlide, options.timeBanner);
 				});
@@ -613,7 +613,7 @@ if(options.touch){
 ======================================================*/
 	//pagination
 	if(!options.pagination){
-		$(".pagHighlight").css("display","none");
+		$this.parent().find(".pagHighlight").css("display","none");
 	}
 }
 })(jQuery);
