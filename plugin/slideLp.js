@@ -1,8 +1,11 @@
 (function($){
 $.fn.slideLp = function(options){
 	//var selector
-	$this = $(this).find(".wrapHighlight");
+	var $this = $(this);
 
+	$this.each(function(){
+		$this = $(this).find(".wrapHighlight");	
+	});
 /*=====================================================
 	options
 ======================================================*/
@@ -15,14 +18,14 @@ $.fn.slideLp = function(options){
 		timeDelayOut: 700,
 		pagination: true,
 		navButtons: true,
-		keyboard: true,
+		keyboard: false,
 		touch: true,
 		thresholdX: 100,
 		thresholdY: 100,
 		touchName: "",
 		prevName: "<",
 		nextName: ">",
-		paginationThumb: false,
+		paginationThumb: true,
 		thumbSizeWidth: "150px",
 		thumbSizeHeight: "100px",
 		effects: "fade" //"pageHoriz", "slide", "fade", "pageVert"
@@ -92,7 +95,7 @@ if(options.pagination){
 	var $contBanner = $this.find(".listCont li .cont").html();
 
 	$.each($this.find(".listCont li"),function(index){
-		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
+		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+index +'</a>\n';
 	});
 	$pages += "</nav>";
 	//add before section wrapHighlight
@@ -322,7 +325,7 @@ if(options.touch){
 				======================================================*/
 				function animaFade(){
 					var $self = $this.parent().find(".pagHighlight .active");
-
+					
 					if($self.next().length == "0"){
 						$this.parent().find(".pagHighlight a:last").removeClass("active");
 						$this.parent().find(".pagHighlight a:first").addClass("active");
