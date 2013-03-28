@@ -41,6 +41,20 @@ $.fn.slideLp = function(options){
 		width: ""+ $widthThis +"px",
 		height: ""+ $heightThis +"px"
 	});
+
+	//ie
+	if ($.browser.msie) {
+	    if(parseInt($.browser.version) == 8){
+	         // Para IE8
+	       options.touch = false
+	    } else if(parseInt($.browser.version) == 7){
+	    	// Para IE7
+         	options.touch = false
+	    } else if(parseInt($.browser.version) == 6){
+	         // Para IE6
+	         options.touch = false
+	    }
+	}
 /*=====================================================
 	pagination
 ======================================================*/
@@ -249,38 +263,7 @@ if(options.touch){
     });
 	
 
-	// var hammer = new Hammer(document.getElementById(options.touchName));
-
-	// $this.find(".wrapHighlight ul li").bind("dragstart", function() { 
- //        return false; 
- //    });
-
-	// hammer.onswipe = function(ev){
-	// 	// determine which direction we need to show the preview
-	//     	if (ev.direction == "left") {
-	// 	  		var $self = $this.parent().find(".pagHighlight .active");
-
-	// 			if($self.next().length == "0"){
-	// 				$this.parent().find(".pagHighlight a:last").removeClass("active");
-	// 				$this.parent().find(".pagHighlight a:first").addClass("active").click();
-	// 			}
-
-	// 			$self.next().addClass("active").click().prev().removeClass("active");
-
-	//       }else if (ev.direction == "right") {
-	// 	  		var $self = $this.parent().find(".pagHighlight .active");
-
-	// 			if($self.prev().length == "0"){
-	// 				$this.parent().find(".pagHighlight a:first").removeClass("active");
-	// 				$this.parent().find(".pagHighlight a:last").addClass("active").click();
-	// 			}
-
-	// 			$self.prev().addClass("active").click().next().removeClass("active");
-	//       }else if (ev.direction == "up" || ev.direction == "down") {
-	// 	  		null;
-	//       }
-	// }
-   
+	
 }else{
 	null;
 }
