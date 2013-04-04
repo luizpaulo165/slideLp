@@ -16,6 +16,7 @@ $.fn.slideLp = function(options){
 		timeSlide: 800,
 		timeDelayIn: 500,
 		timeDelayOut: 700,
+		barCounter: true,
 		pagination: true,
 		navButtons: true,
 		keyboard: false,
@@ -119,6 +120,41 @@ if(options.pagination){
 	});
 }
 /*=====================================================
+	barCounter
+======================================================*/
+if(options.barCounter && options.auto){
+	var $wrapCounter = "<div id='wrapCounter'><div class='counterLine'>1</div></div>";
+
+	$this.parent().append($wrapCounter);
+
+	function animaCounter(){
+		$("#wrapCounter .counterLine").css({
+			width: "0%"
+		});
+
+		$("#wrapCounter .counterLine").stop(true,true).animate({
+			width: "100%"
+		},options.timeBanner,function(){
+			animaCounter();
+		});
+	}
+	animaCounter();
+
+	$this.parent().find(".pagHighlight a").bind({
+		click: function(){
+			animaCounter();
+		}
+	});
+
+}else{
+	var $wrapCounter = "<div id='wrapCounter'><div class='counterLine'>1</div></div>";
+
+	$this.parent().append($wrapCounter);
+	$("#wrapCounter").css({
+		display: "none"
+	});
+}
+/*=====================================================
 	navButtons
 ======================================================*/
 if(options.navButtons){
@@ -163,6 +199,9 @@ if(options.navButtons){
 }else{	
 	null;
 }
+/*=====================================================
+	keyboard
+======================================================*/
 if(options.keyboard){
 	//action keyboard
 	$(window).keydown(function(e){
@@ -195,7 +234,9 @@ if(options.keyboard){
 	null;
 }
 
-//action touch
+/*=====================================================
+	touch
+======================================================*/
 var $thisWrap = $this.parent();
 if(options.touch){
     $thisWrap.each(function () {
@@ -259,8 +300,6 @@ if(options.touch){
 	    this.addEventListener("touchend", touchEnd, false);
 	    this.addEventListener("touchcancel", touchCancel, false);
     });
-	
-
 	
 }else{
 	null;
