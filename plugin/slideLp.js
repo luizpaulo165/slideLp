@@ -43,17 +43,15 @@ $.fn.slideLp = function(options){
 	});
 
 	//ie
-	if ($.browser.msie) {
-	    if(parseInt($.browser.version) == 8){
-	         // Para IE8
-	       options.touch = false
-	    } else if(parseInt($.browser.version) == 7){
-	    	// Para IE7
-         	options.touch = false
-	    } else if(parseInt($.browser.version) == 6){
-	         // Para IE6
-	         options.touch = false
-	    }
+	if (document.all && (!document.documentMode || (document.documentMode && document.documentMode == 8))) {
+	    options.touch = false;
+	    alert(options.touch)
+	}else if(document.all && (!document.documentMode || (document.documentMode && document.documentMode == 7))){
+		options.touch = false;
+		alert(options.touch)
+	}else if(document.all && (!document.documentMode || (document.documentMode && document.documentMode == 6))){
+		options.touch = false;
+		alert(options.touch)
 	}
 /*=====================================================
 	pagination
