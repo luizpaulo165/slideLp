@@ -14,7 +14,7 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small,strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,  caption, figure{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;vertical-align:baseline;text-decoration:none!important;outline: 0!important;}
 strong{font-weight:bold;}
 :focus{outline:0}
-body{font-family:Arial,Verdana,Tahoma,Helvetica, sans-serif;font-size:10px;background:white;}
+body{font-family:Arial,Verdana,Tahoma,Helvetica, sans-serif;font-size:10px;background:#2C4762;}
 ol, ul{list-style:none}
 table{border-collapse: separate;border-spacing:0}
 caption, th, td{text-align: left;font-weight: normal}
@@ -31,4 +31,5 @@ blockquote, q{ quotes: "" ""}
 /* =============================================================================
    Geral
    ========================================================================== */
-   #highlight{width:960px;height:420px;border:1px solid #505050;margin:0 auto;padding:0px!important;position:relative;top:150px;overflow:hidden;}
+   #container{width:100%;height:100%;display:block;overflow:hidden;}
+   #highlight{width:960px;height:420px;border:0px solid #fff;margin:-210px 0 0 -480px;padding:0px!important;position:absolute;top:50%;left:50%;overflow:hidden;box-shadow:0px 0px 8px #1C2E3F;   -moz-box-shadow:0px 0px 8px #1C2E3F;-webkit-box-shadow:0px 0px 8px #1C2E3F;-o-box-shadow:0px 0px 8px #1C2E3F;-ms-box-shadow:0px 0px 8px #1C2E3F;}

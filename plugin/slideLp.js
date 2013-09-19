@@ -18,6 +18,7 @@ $.fn.slideLp = function(options){
 		timeDelayOut: 700,
 		barCounter: true,
 		pagination: true,
+		paginationHover: true,
 		navButtons: true,
 		keyboard: false,
 		touch: true,
@@ -62,9 +63,29 @@ if(options.pagination){
 	var $contBanner = $this.find(".listCont li .cont").html();
 
 	/*=====================================================
+	paginationHover
+	======================================================*/
+	if(options.paginationHover){
+			if(options.paginationThumb){
+				paginationHover = false;
+			}else{
+
+			$.each($this.find(".listCont li"),function(index){
+				$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
+				});
+				$pages += "</nav>";
+			}
+
+			var thumbHoverCont = "<div class='thumbHoverCont'></div>";
+
+			$(this).prepend(thumbHoverCont);
+	}
+
+	/*=====================================================
 	paginationThumb
 	======================================================*/
 	if(options.paginationThumb){
+
 		$.each($this.find(".listCont li"),function(index){
 		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
 		});
@@ -96,7 +117,7 @@ if(options.pagination){
 		});
 	}else{
 		$.each($this.find(".listCont li"),function(index){
-		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ index +'</a>\n';
+		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
 		});
 		$pages += "</nav>";
 		//add before section wrapHighlight
@@ -108,7 +129,7 @@ if(options.pagination){
 	var $contBanner = $this.find(".listCont li .cont").html();
 
 	$.each($this.find(".listCont li"),function(index){
-		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+index +'</a>\n';
+		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
 	});
 	$pages += "</nav>";
 	//add before section wrapHighlight
@@ -143,6 +164,23 @@ if(options.barCounter && options.auto){
 	$this.parent().find(".pagHighlight a").bind({
 		click: function(){
 			animaCounter();
+		},
+		mouseenter: function(){
+			var linkThis = $(this),
+					contThisLink = linkThis.html(),
+					linkPosition= linkThis.position();
+
+			$this.parent().find(".thumbHoverCont").html(contThisLink);
+
+			$this.parent().find(".thumbHoverCont").css({
+				left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
+			}).stop(false,true).fadeIn(300);
+
+		},
+		mouseleave: function(){
+
+			$this.parent().find(".thumbHoverCont").stop(false,true).fadeOut(300);
+
 		}
 	});
 
@@ -332,10 +370,10 @@ if(options.touch){
 						$linkPag.removeClass("active")
 						$self.addClass("active");
 
-						$li.fadeOut(options.timeDelayOut).removeClass("active");
+						$li.stop(false,true).fadeOut(options.timeDelayOut).removeClass("active");
 
 						$listCont.find("li[data-position="+ $selfPosition +"] .cont").css("width","100%");
-						$listCont.find("li[data-position="+ $selfPosition +"]").fadeIn(options.timeDelayIn).addClass("active");
+						$listCont.find("li[data-position="+ $selfPosition +"]").stop(false,true).fadeIn(options.timeDelayIn).addClass("active");
 					
 						return false;
 					}
@@ -355,13 +393,13 @@ if(options.touch){
 
 					var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
 
-					$li.fadeOut(options.timeDelayOut).removeClass("active");
+					$li.stop(false,true).fadeOut(options.timeDelayOut).removeClass("active");
 
 					$listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
 						width: "100%",
 						display: "block"
 					});
-					$listCont.find("li[data-position="+ $selfPosition +"]").fadeIn(options.timeDelayIn).addClass("active");
+					$listCont.find("li[data-position="+ $selfPosition +"]").stop(false,true).fadeIn(options.timeDelayIn).addClass("active");
 
 					return false;
 				}
