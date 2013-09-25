@@ -11,6 +11,7 @@ $.fn.slideLp = function(options){
 ======================================================*/
 	var defaults = {
 		auto: true,
+		fullScreen: false,
 		timeBanner: 7000,
 		timeDelay: 500,
 		timeSlide: 800,
@@ -73,7 +74,8 @@ if(options.pagination){
 			$.each($this.find(".listCont li"),function(index){
 				$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
 				});
-				$pages += "</nav>";
+			$pages += "</nav>";
+
 			}
 
 			var thumbHoverCont = "<div class='thumbHoverCont'></div>";
@@ -116,9 +118,15 @@ if(options.pagination){
 			height: "100%"
 		});
 	}else{
-		$.each($this.find(".listCont li"),function(index){
-		$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
-		});
+		if(options.paginationHover){
+			$.each($this.find(".listCont li"),function(index){
+				//$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
+			});
+		}else{	
+			$.each($this.find(".listCont li"),function(index){
+				$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
+			});
+		}
 		$pages += "</nav>";
 		//add before section wrapHighlight
 		$this.parent().append($pages);
@@ -164,23 +172,6 @@ if(options.barCounter && options.auto){
 	$this.parent().find(".pagHighlight a").bind({
 		click: function(){
 			animaCounter();
-		},
-		mouseenter: function(){
-			var linkThis = $(this),
-					contThisLink = linkThis.html(),
-					linkPosition= linkThis.position();
-
-			$this.parent().find(".thumbHoverCont").html(contThisLink);
-
-			$this.parent().find(".thumbHoverCont").css({
-				left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
-			}).stop(false,true).fadeIn(300);
-
-		},
-		mouseleave: function(){
-
-			$this.parent().find(".thumbHoverCont").stop(false,true).fadeOut(300);
-
 		}
 	});
 
@@ -343,6 +334,90 @@ if(options.touch){
 	null;
 }
 /*=====================================================
+	fullScreen
+======================================================*/
+if(options.fullScreen){
+	
+  var win = $(window),
+      fullscreen = $this.parent(),
+      div = $this,
+      ul = fullscreen.find('ul'),
+      cont = fullscreen.find('.cont'),
+      li = fullscreen.find('li'),
+      image = ul.find('img'),
+      imageWidth = image.width(),
+      imageHeight = image.height(),
+      imageRatio = imageWidth / imageHeight;
+
+  function resizeImage() {
+    var winWidth = win.width(),
+        winHeight = win.height(),
+        winRatio = winWidth / winHeight;
+  
+    if(winRatio > imageRatio) {
+      fullscreen.css({
+        width: winWidth,
+        height: Math.round(winWidth / imageRatio)
+      });
+      div.css({
+        width: winWidth,
+        height: Math.round(winWidth / imageRatio)
+      });
+      ul.css({
+        width: winWidth * li.length,
+        height: Math.round(winWidth / imageRatio)
+      });
+      cont.css({
+        width: winWidth,
+        height: Math.round(winWidth / imageRatio)
+      });
+      li.css({
+        width: winWidth,
+        height: Math.round(winWidth / imageRatio)
+      });
+      image.css({
+        width: winWidth,
+        //height: Math.round(winWidth / imageRatio)
+      });
+    }else {
+      fullscreen.css({
+        width: Math.round((winWidth - imageRatio)),
+        height: Math.round((winWidth / imageRatio))
+      });
+      div.css({
+        width: Math.round((winWidth - imageRatio)),
+        height: Math.round((winWidth / imageRatio))
+      });
+      ul.css({
+        width: Math.round((winWidth - imageRatio) * li.length),
+        height: Math.round((winWidth / imageRatio))
+      });
+      cont.css({
+        width: Math.round((winWidth - imageRatio)),
+        height: Math.round((winWidth / imageRatio))
+      });
+      li.css({
+        width: Math.round((winWidth - imageRatio)),
+        height: Math.round((winWidth / imageRatio))
+      });
+      image.css({
+        width: Math.round((winWidth - imageRatio)),
+        //height: Math.round((winWidth / imageRatio))
+      });
+    }
+  }
+
+  win.bind({
+    load: function() {
+      resizeImage();
+    },
+    resize: function() {
+      resizeImage();
+    }
+  });
+
+}
+/*=====================================================
 	effects
 ======================================================*/
 	function motion(effects){
@@ -376,6 +451,23 @@ if(options.touch){
 						$listCont.find("li[data-position="+ $selfPosition +"]").stop(false,true).fadeIn(options.timeDelayIn).addClass("active");
 					
 						return false;
+					},
+					mouseenter: function(){
+						var linkThis = $(this),
+								contThisLink = linkThis.html(),
+								linkPosition= linkThis.position();
+
+						$this.parent().find(".thumbHoverCont").html(contThisLink);
+
+						$this.parent().find(".thumbHoverCont").css({
+							left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
+						}).stop(false,true).fadeIn(300);
+
+					},
+					mouseleave: function(){
+
+						$this.parent().find(".thumbHoverCont").stop(false,true).fadeOut(300);
+
 					}
 				});
 				/*=====================================================
@@ -453,6 +545,23 @@ if(options.touch){
 						},options.timeDelay);
 
 						return false;
+					},
+					mouseenter: function(){
+						var linkThis = $(this),
+								contThisLink = linkThis.html(),
+								linkPosition= linkThis.position();
+
+						$this.parent().find(".thumbHoverCont").html(contThisLink);
+
+						$this.parent().find(".thumbHoverCont").css({
+							left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
+						}).stop(false,true).fadeIn(300);
+
+					},
+					mouseleave: function(){
+
+						$this.parent().find(".thumbHoverCont").stop(false,true).fadeOut(300);
+
 					}
 				});
 				/*=====================================================
@@ -542,6 +651,23 @@ if(options.touch){
 					},options.timeDelay);
 
 					return false;
+				},
+				mouseenter: function(){
+					var linkThis = $(this),
+							contThisLink = linkThis.html(),
+							linkPosition= linkThis.position();
+
+					$this.parent().find(".thumbHoverCont").html(contThisLink);
+
+					$this.parent().find(".thumbHoverCont").css({
+						left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
+					}).stop(false,true).fadeIn(300);
+
+				},
+				mouseleave: function(){
+
+					$this.parent().find(".thumbHoverCont").stop(false,true).fadeOut(300);
+
 				}
 			});
 			/*=====================================================
@@ -632,6 +758,23 @@ if(options.touch){
 					},options.timeSlide);
 
 					return false;
+				},
+				mouseenter: function(){
+					var linkThis = $(this),
+							contThisLink = linkThis.html(),
+							linkPosition= linkThis.position();
+
+					$this.parent().find(".thumbHoverCont").html(contThisLink);
+
+					$this.parent().find(".thumbHoverCont").css({
+						left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
+					}).stop(false,true).fadeIn(300);
+
+				},
+				mouseleave: function(){
+
+					$this.parent().find(".thumbHoverCont").stop(false,true).fadeOut(300);
+
 				}
 			});
 			/*=====================================================
