@@ -497,13 +497,17 @@ if(options.fullScreen){
 				}
 				//auto
 				if(options.auto){
-					//hover
-					time = setInterval(animaFade, options.timeBanner);
-
-					$this.parent().find(".pagHighlight a").click(function(){
-						time = clearInterval(time);
+					if($this.parent().find(".pagHighlight a").length <= 1){
+						null
+					}else{
+						//hover
 						time = setInterval(animaFade, options.timeBanner);
-					});
+
+						$this.parent().find(".pagHighlight a").click(function(){
+							time = clearInterval(time);
+							time = setInterval(animaFade, options.timeBanner);
+						});
+					}
 				}
 			break;
 
@@ -594,13 +598,26 @@ if(options.fullScreen){
 				}
 				//auto
 				if(options.auto){
-					time = setInterval(animaPageHoriz, options.timeBanner);
-
-					$this.parent().find(".pagHighlight a").click(function(){
-						time = clearInterval(time);
+					if($this.parent().find(".pagHighlight a").length <= 1){
+						null
+					}else{
+						//hover
 						time = setInterval(animaPageHoriz, options.timeBanner);
-					});
+
+						$this.parent().find(".pagHighlight a").click(function(){
+							time = clearInterval(time);
+							time = setInterval(animaFade, options.timeBanner);
+						});
+					}
 				}
+				// if(options.auto){
+				// 	time = setInterval(animaPageHoriz, options.timeBanner);
+
+				// 	$this.parent().find(".pagHighlight a").click(function(){
+				// 		time = clearInterval(time);
+				// 		time = setInterval(animaPageHoriz, options.timeBanner);
+				// 	});
+				// }
 			break;
 
 			case 'pageVert':
@@ -700,13 +717,26 @@ if(options.fullScreen){
 			}
 			//auto
 			if(options.auto){
-				time = setInterval(animaPageVert, options.timeBanner);
-
-				$this.parent().find(".pagHighlight a").click(function(){
-					time = clearInterval(time);
+				if($this.parent().find(".pagHighlight a").length <= 1){
+					null
+				}else{
+					//hover
 					time = setInterval(animaPageVert, options.timeBanner);
-				});
+
+					$this.parent().find(".pagHighlight a").click(function(){
+						time = clearInterval(time);
+						time = setInterval(animaFade, options.timeBanner);
+					});
+				}
 			}
+			// if(options.auto){
+			// 	time = setInterval(animaPageVert, options.timeBanner);
+
+			// 	$this.parent().find(".pagHighlight a").click(function(){
+			// 		time = clearInterval(time);
+			// 		time = setInterval(animaPageVert, options.timeBanner);
+			// 	});
+			// }
 			break;
 
 			case 'slide':
@@ -801,13 +831,26 @@ if(options.fullScreen){
 			}
 			//auto
 			if(options.auto){
-				time = setInterval(animaSlide, options.timeBanner);
-
-				$this.parent().find(".pagHighlight a").click(function(){
-					time = clearInterval(time);
+				if($this.parent().find(".pagHighlight a").length <= 1){
+					null
+				}else{
+					//hover
 					time = setInterval(animaSlide, options.timeBanner);
-				});
+
+					$this.parent().find(".pagHighlight a").click(function(){
+						time = clearInterval(time);
+						time = setInterval(animaFade, options.timeBanner);
+					});
+				}
 			}
+			// if(options.auto){
+			// 	time = setInterval(animaSlide, options.timeBanner);
+
+			// 	$this.parent().find(".pagHighlight a").click(function(){
+			// 		time = clearInterval(time);
+			// 		time = setInterval(animaSlide, options.timeBanner);
+			// 	});
+			// }
 			break;
 		}
 	}
