@@ -17,7 +17,7 @@ $.fn.slideLp = function(options){
 		timeSlide: 800,
 		timeDelayIn: 500,
 		timeDelayOut: 700,
-		barCounter: true,
+		barCounter: false,
 		pagination: true,
 		paginationHover: true,
 		navButtons: true,
@@ -40,10 +40,10 @@ $.fn.slideLp = function(options){
 	var $heightThis = $this.height();
 	var $widthThis = $this.width();
 
-	$(".wrapHighlight").css({
-		width: ""+ $widthThis +"px",
-		height: ""+ $heightThis +"px"
-	});
+	// $(".wrapHighlight").css({
+	// 	width: ""+ $widthThis +"px",
+	// 	height: ""+ $heightThis +"px"
+	// });
 
 	//ie
 	if (document.all && (!document.documentMode || (document.documentMode && document.documentMode == 8))) {
@@ -152,16 +152,16 @@ if(options.pagination){
 	barCounter
 ======================================================*/
 if(options.barCounter && options.auto){
-	var $wrapCounter = "<div id='wrapCounter'><div class='counterLine'>1</div></div>";
+	var $wrapCounter = "<div id='wrapCounter'><div class='counterLine'></div></div>";
 
 	$this.parent().append($wrapCounter);
 
 	function animaCounter(){
-		$("#wrapCounter .counterLine").css({
+		$this.parent().find("#wrapCounter .counterLine").css({
 			width: "0%"
 		});
 
-		$("#wrapCounter .counterLine").stop(true,true).animate({
+		$this.parent().find("#wrapCounter .counterLine").stop(true,true).animate({
 			width: "100%"
 		},options.timeBanner,function(){
 			animaCounter();
@@ -179,7 +179,7 @@ if(options.barCounter && options.auto){
 	var $wrapCounter = "<div id='wrapCounter'><div class='counterLine'>1</div></div>";
 
 	$this.parent().append($wrapCounter);
-	$("#wrapCounter").css({
+	$this.parent().find("#wrapCounter").css({
 		display: "none"
 	});
 }
