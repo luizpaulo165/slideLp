@@ -432,6 +432,8 @@ if(options.fullScreen){
 				var $liCont = $li.find(".cont");
 				var $linkPag = $this.parent().find(".pagHighlight a");
 
+
+				$listCont.find(".listCont li").css("position","absolute");
 				$listCont.find("li:first").addClass("active");
 				$listCont.find("li:first .cont").css("width","100%");
 				$listCont.find("li").css("display","none");
