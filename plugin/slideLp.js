@@ -12,6 +12,7 @@ $.fn.slideLp = function(options){
 	var defaults = {
 		auto: true,
 		fullScreen: false,
+		adjustmentSize: 0,
 		timeBanner: 7000,
 		timeDelay: 500,
 		timeSlide: 800,
@@ -353,56 +354,61 @@ if(options.fullScreen){
     var winWidth = win.width(),
         winHeight = win.height(),
         winRatio = winWidth / winHeight;
+
+        console.log(winHeight)
   
     if(winRatio > imageRatio) {
       fullscreen.css({
         width: winWidth,
-        height: Math.round(winWidth / imageRatio)
+        height: winHeight
+        // height: Math.round(winWidth / imageRatio)
       });
       div.css({
         width: winWidth,
-        height: Math.round(winWidth / imageRatio)
+        height: winHeight
       });
       ul.css({
         width: winWidth * li.length,
-        height: Math.round(winWidth / imageRatio)
+        height: winHeight
       });
       cont.css({
         width: winWidth,
-        height: Math.round(winWidth / imageRatio)
+        height: winHeight
       });
       li.css({
         width: winWidth,
-        height: Math.round(winWidth / imageRatio)
+        height: imageHeight
       });
       image.css({
         width: winWidth,
-        //height: Math.round(winWidth / imageRatio)
+        height: "auto"
       });
     }else {
+    	
       fullscreen.css({
-        width: Math.round((winWidth - imageRatio)),
-        height: Math.round((winWidth / imageRatio))
+        width: Math.round((winWidth - imageRatio) + options.adjustmentSize),
+        height: winHeight
+        // height: Math.round((winWidth / imageRatio))
       });
       div.css({
-        width: Math.round((winWidth - imageRatio)),
-        height: Math.round((winWidth / imageRatio))
+        width: Math.round((winWidth - imageRatio) + options.adjustmentSize),
+        height: winHeight
       });
       ul.css({
-        width: Math.round((winWidth - imageRatio) * li.length),
-        height: Math.round((winWidth / imageRatio))
+        width: Math.round((winWidth - imageRatio) * li.length) + options.adjustmentSize,
+        height: winHeight
       });
       cont.css({
-        width: Math.round((winWidth - imageRatio)),
-        height: Math.round((winWidth / imageRatio))
+        width: Math.round((winWidth - imageRatio) + options.adjustmentSize),
+        height: winHeight
       });
       li.css({
-        width: Math.round((winWidth - imageRatio)),
-        height: Math.round((winWidth / imageRatio))
+        width: Math.round((winWidth - imageRatio) + options.adjustmentSize),
+        height: winHeight
       });
       image.css({
-        width: Math.round((winWidth - imageRatio)),
-        //height: Math.round((winWidth / imageRatio))
+        width: "auto",
+        height: winHeight
       });
     }
   }
@@ -433,7 +439,7 @@ if(options.fullScreen){
 				var $linkPag = $this.parent().find(".pagHighlight a");
 
 
-				$listCont.find(".listCont li").css("position","absolute");
+				$this.find(".listCont li").css("position","absolute");
 				$listCont.find("li:first").addClass("active");
 				$listCont.find("li:first .cont").css("width","100%");
 				$listCont.find("li").css("display","none");

@@ -32,4 +32,4 @@ blockquote, q{ quotes: "" ""}
    Geral
    ========================================================================== */
    #container{width:100%;height:100%;display:block;overflow:hidden;}
-   #highlight{width:960px;height:420px;border:0px solid #fff;margin:-210px 0 0 -480px;padding:0px!important;position:absolute;top:50%;left:50%;overflow:hidden;box-shadow:0px 0px 8px #1C2E3F;   -moz-box-shadow:0px 0px 8px #1C2E3F;-webkit-box-shadow:0px 0px 8px #1C2E3F;-o-box-shadow:0px 0px 8px #1C2E3F;-ms-box-shadow:0px 0px 8px #1C2E3F;}
+   #highlight{border:0px solid #fff;padding:0px!important;position:relative;overflow:hidden;box-shadow:0px 0px 8px #1C2E3F;   -moz-box-shadow:0px 0px 8px #1C2E3F;-webkit-box-shadow:0px 0px 8px #1C2E3F;-o-box-shadow:0px 0px 8px #1C2E3F;-ms-box-shadow:0px 0px 8px #1C2E3F;}

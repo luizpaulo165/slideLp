@@ -1,6 +1,7 @@
 $(function(){
 	$("#highlight").slideLp({
-		auto: true,
+		auto: false,
+		fullScreen: true,
 		timeBanner: 7000,
 		timeDelay: 800,
 		timeDelayIn: 1000,
