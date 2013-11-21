@@ -188,11 +188,13 @@ if(options.barCounter && options.auto){
 	navButtons
 ======================================================*/
 if(options.navButtons){
-	var $prevButton = '<a href="javascript:void()" class="prevButton">'+ options.prevName +'</a>';
-	var $nextButton = '<a href="javascript:void()" class="nextButton">'+ options.nextName +'</a>';
+	var $prevButton = '<span class="prevButton">'+ options.prevName +'</span>';
+	var $nextButton = '<span class="nextButton">'+ options.nextName +'</span>';
 	//add buttons in html
-	$this.parent().append($prevButton);
-	$this.parent().append($nextButton);
+	if(!$this.find(".listCont li").length > 1){
+		$this.parent().append($prevButton);
+		$this.parent().append($nextButton);
+	}
 
 	//action nextButton
 	$this.parent().find(".nextButton").bind({
