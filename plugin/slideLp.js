@@ -21,6 +21,7 @@ $.fn.slideLp = function(options){
 		barCounter: false,
 		pagination: true,
 		paginationHover: true,
+		paginationCounter: true,
 		navButtons: true,
 		keyboard: false,
 		touch: true,
@@ -149,6 +150,16 @@ if(options.pagination){
 		display: "none"
 	});
 }
+
+/*=====================================================
+	paginationCounter
+======================================================*/
+if(options.paginationCounter){
+	alert(0)
+}else{
+	null;
+}
+
 /*=====================================================
 	barCounter
 ======================================================*/
@@ -188,13 +199,11 @@ if(options.barCounter && options.auto){
 	navButtons
 ======================================================*/
 if(options.navButtons){
-	var $prevButton = '<span class="prevButton">'+ options.prevName +'</span>';
-	var $nextButton = '<span class="nextButton">'+ options.nextName +'</span>';
+	var $prevButton = '<a href="javascript:void()" class="prevButton">'+ options.prevName +'</a>';
+	var $nextButton = '<a href="javascript:void()" class="nextButton">'+ options.nextName +'</a>';
 	//add buttons in html
-	if(!$this.find(".listCont li").length > 1){
-		$this.parent().append($prevButton);
-		$this.parent().append($nextButton);
-	}
+	$this.parent().append($prevButton);
+	$this.parent().append($nextButton);
 
 	//action nextButton
 	$this.parent().find(".nextButton").bind({
@@ -231,6 +240,7 @@ if(options.navButtons){
 }else{	
 	null;
 }
+
 /*=====================================================
 	keyboard
 ======================================================*/
