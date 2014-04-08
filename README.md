@@ -30,22 +30,32 @@ HTML base e Chamada js
 
 Html base do plugin:
 
-	<section id="highlight"> <!-- section onde vai ser agrupada o plugin -->
-	   <section class="wrapHighlight"> <!-- esta section não pode ter a classe "wrapHighlight" removida -->
-	      <ul class="listCont">
-	        <li data-position="0" class="">
-	          <div class="cont"><!-- esta div não pode ser removida -->
-	            conteudo
-	          </div>
-	        </li><!-- block -->
-	        <li data-position="1" class="">
-	          <div class="cont">
-	            conteudo
-	          </div>
-	        </li><!-- block -->
-	      </ul>
-	    </section><!-- wrapHighlight -->
-	</section><!-- highlight -->
+	<section id="highlight">
+       <section class="wrapHighlight">
+          <ul class="listCont">
+            <li>
+              <div class="cont">
+                <img src="imgs/img1.jpg" />
+              </div>
+            </li><!-- block -->
+            <li>
+              <div class="cont">
+                <img src="imgs/img2.jpg" />
+              </div>
+            </li><!-- block -->
+            <li>
+              <div class="cont">
+                <img src="imgs/img3.jpg" />
+              </div>
+            </li><!-- block -->
+            <li>
+              <div class="cont">
+                <img src="imgs/img4.jpg" />
+              </div>
+            </li><!-- block -->
+          </ul>
+        </section><!-- wrapHighlight -->
+    </section><!-- highlight -->
 
 Chamada base do plugin:
 

@@ -59,6 +59,18 @@ $.fn.slideLp = function(options){
 		options.touch = false;
 		alert(options.touch)
 	}
+
+	//listCont data-position
+	var $contDataPosition = -1;
+	$this.find(".listCont li").each(function(){
+		var $self = $(this);
+
+		$contDataPosition += 1;
+
+		$self.attr("data-position",$contDataPosition);
+
+		console.log($self)
+	});
 /*=====================================================
 	pagination
 ======================================================*/
