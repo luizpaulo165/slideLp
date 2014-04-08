@@ -10,9 +10,8 @@ $.fn.slideLp = function(options){
 	options
 ======================================================*/
 	var defaults = {
+		effects: "fade", //"pageHoriz", "slide", "fade", "pageVert"
 		auto: true,
-		fullScreen: false,
-		adjustmentSize: 0,
 		timeBanner: 7000,
 		timeDelay: 500,
 		timeSlide: 800,
@@ -20,21 +19,22 @@ $.fn.slideLp = function(options){
 		timeDelayOut: 700,
 		barCounter: false,
 		pagination: true,
+		paginationThumb: false,
+		thumbSizeWidth: 150,
+		thumbSizeHeight: 150,
 		paginationHover: true,
-		paginationCounter: false,
+		paginationCounter: true,
 		paginationCounterTab: "/",
 		navButtons: true,
+		prevName: "<",
+		nextName: ">",
 		keyboard: false,
-		touch: true,
+		touch: false,
 		thresholdX: 100,
 		thresholdY: 100,
 		touchName: "",
-		prevName: "<",
-		nextName: ">",
-		paginationThumb: true,
-		thumbSizeWidth: "150px",
-		thumbSizeHeight: "100px",
-		effects: "fade" //"pageHoriz", "slide", "fade", "pageVert"
+		fullScreen: false,
+		adjustmentSize: 0
 	}
 	options = $.extend(defaults, options);
 /*=====================================================
@@ -106,8 +106,8 @@ if(options.pagination){
 		$this.parent().find(".pagHighlight a").css({
 			textIndent: "0",
 			textAlign: "center",
-			width: options.thumbSizeWidth,
-			height: options.thumbSizeHeight,
+			width: options.thumbSizeWidth+"px",
+			height: options.thumbSizeHeight+"px",
 			"border-radius": "0",
 			"-moz-border-radius": "0",
 			"-webkit-border-radius": "0",
