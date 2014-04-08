@@ -1,7 +1,7 @@
 $(function(){
 	$("#highlight").slideLp({
-		auto: false,
-		fullScreen: true,
+		auto: true,
+		fullScreen: false,
 		timeBanner: 7000,
 		timeDelay: 800,
 		timeDelayIn: 1000,
@@ -10,6 +10,10 @@ $(function(){
 		thumbSizeWidth: "50px",
 		thumbSizeHeight: "35px",
 		pagination: true,
-		barCounter:true
+		barCounter:true,
+		paginationCounter: true,
+		paginationCounterTab: "/",
+		effects: "pageVert" //"pageHoriz", "slide", "fade", "pageVert"
 	});
+	
 });
