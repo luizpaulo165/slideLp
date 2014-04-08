@@ -68,8 +68,11 @@ $.fn.slideLp = function(options){
 		$contDataPosition += 1;
 
 		$self.attr("data-position",$contDataPosition);
+	});
 
-		console.log($self)
+	//$this styles
+	$this.parent().css({
+		position: "relative"
 	});
 /*=====================================================
 	pagination
@@ -87,13 +90,16 @@ if(options.pagination){
 			}else{
 
 			$.each($this.find(".listCont li"),function(index){
-				$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ $(this).find(".cont").html() +'</a>\n';
+				var $selfImgSrc = $(this).find(".cont img").attr("src");
+
+				$pages += '<a href="javascript:void(0)" data-position='+ index +' data-urlImg='+$selfImgSrc+'></a>\n';
 				});
+			// '+ $(this).find(".cont").html() +'
 			$pages += "</nav>";
 
 			}
 
-			var thumbHoverCont = "<div class='thumbHoverCont'></div>";
+			var thumbHoverCont = "<div class='thumbHoverCont'><img src='' /></div>";
 
 			$(this).prepend(thumbHoverCont);
 	}
@@ -279,8 +285,7 @@ if(options.paginationCounter){
 		$this.parent().find(".pagHighlight a.active").each(function(){
 			var $self = $(this),
 					$liActive = $self.index();
-					
-					console.log($liActive);
+
 					$this.parent().find(".lp_counter .number_photo").text($liActive+1);
 		});
 	}
@@ -417,8 +422,6 @@ if(options.fullScreen){
     var winWidth = win.width(),
         winHeight = win.height(),
         winRatio = winWidth / winHeight;
-
-        console.log(winHeight)
   
     if(winRatio > imageRatio) {
       fullscreen.css({
@@ -532,7 +535,9 @@ if(options.fullScreen){
 								contThisLink = linkThis.html(),
 								linkPosition= linkThis.position();
 
-						$this.parent().find(".thumbHoverCont").html(contThisLink);
+						$this.parent().find(".thumbHoverCont img").attr({
+							src: linkThis.data("urlimg")
+						});
 
 						$this.parent().find(".thumbHoverCont").css({
 							left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
@@ -638,7 +643,9 @@ if(options.fullScreen){
 								contThisLink = linkThis.html(),
 								linkPosition= linkThis.position();
 
-						$this.parent().find(".thumbHoverCont").html(contThisLink);
+						$this.parent().find(".thumbHoverCont img").attr({
+							src: linkThis.data("urlimg")
+						});
 
 						$this.parent().find(".thumbHoverCont").css({
 							left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
@@ -765,7 +772,9 @@ if(options.fullScreen){
 							contThisLink = linkThis.html(),
 							linkPosition= linkThis.position();
 
-					$this.parent().find(".thumbHoverCont").html(contThisLink);
+					$this.parent().find(".thumbHoverCont img").attr({
+						src: linkThis.data("urlimg")
+					});
 
 					$this.parent().find(".thumbHoverCont").css({
 						left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
@@ -893,7 +902,9 @@ if(options.fullScreen){
 							contThisLink = linkThis.html(),
 							linkPosition= linkThis.position();
 
-					$this.parent().find(".thumbHoverCont").html(contThisLink);
+					$this.parent().find(".thumbHoverCont img").attr({
+						src: linkThis.data("urlimg")
+					});
 
 					$this.parent().find(".thumbHoverCont").css({
 						left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",

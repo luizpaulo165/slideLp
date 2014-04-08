@@ -36,21 +36,25 @@ Html base do plugin:
             <li>
               <div class="cont">
                 <img src="imgs/img1.jpg" />
+                <div class="title_lp">Título da Imagem</div>
               </div>
             </li><!-- block -->
             <li>
               <div class="cont">
                 <img src="imgs/img2.jpg" />
+                <div class="title_lp">Título da Imagem</div>
               </div>
             </li><!-- block -->
             <li>
               <div class="cont">
                 <img src="imgs/img3.jpg" />
+                <div class="title_lp">Título da Imagem</div>
               </div>
             </li><!-- block -->
             <li>
               <div class="cont">
                 <img src="imgs/img4.jpg" />
+                <div class="title_lp">Título da Imagem</div>
               </div>
             </li><!-- block -->
           </ul>

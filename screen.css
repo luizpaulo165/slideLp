@@ -14,7 +14,7 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small,strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,  caption, figure{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;vertical-align:baseline;text-decoration:none!important;outline: 0!important;}
 strong{font-weight:bold;}
 :focus{outline:0}
-body{font-family:Arial,Verdana,Tahoma,Helvetica, sans-serif;font-size:10px;background:#2C4762;}
+body{font-family:Arial,Verdana,Tahoma,Helvetica, sans-serif;font-size:10px;background:url(imgs/congruent_pentagon.png) repeat top left;}
 ol, ul{list-style:none}
 table{border-collapse: separate;border-spacing:0}
 caption, th, td{text-align: left;font-weight: normal}
@@ -31,5 +31,13 @@ blockquote, q{ quotes: "" ""}
 /* =============================================================================
    Geral
    ========================================================================== */
-   #container{width:100%;height:100%;display:block;overflow:hidden;}
-   #highlight{width:960px;height:420px;border:0px solid #fff;margin:0 auto;padding:0px!important;position:relative;overflow:hidden;box-shadow:0px 0px 8px #1C2E3F;   -moz-box-shadow:0px 0px 8px #1C2E3F;-webkit-box-shadow:0px 0px 8px #1C2E3F;-o-box-shadow:0px 0px 8px #1C2E3F;-ms-box-shadow:0px 0px 8px #1C2E3F;}
+   .center{width:960px;margin:0 auto;position:relative;}
+   #logo{font-family: 'Nova Square', cursive;display:block;margin-bottom:30px;padding:12px;clear:both;overflow:hidden;}
+      #logo figure{position:relative;}
+      #logo img{position:relative;top:15px;z-index:1;}
+      #logo figcaption{text-align:center;font-size:100px;color:#0B486B;width:100%;position:absolute;top:0;z-index:0;text-shadow:0px 1px 0px #fff;-moz-text-shadow:0px 1px 0px #fff;-webkit-text-shadow:0px 1px 0px #fff;-o-text-shadow:0px 1px 0px #fff;-ms-text-shadow:0px 1px 0px #fff;}
+   #container{width:100%;display:block;overflow:hidden;}
+   #highlight{width:960px;height:600px;margin:0 auto;padding:0px!important;overflow:hidden;box-shadow:0px 0px 8px #3B8686;-moz-box-shadow:0px 0px 8px #3B8686;-webkit-box-shadow:0px 0px 8px #3B8686;-o-box-shadow:0px 0px 8px #3B8686;-ms-box-shadow:0px 0px 8px #3B8686;}
+   #author_photo{font-family: 'Nova Square', cursive;font-size:18px;color:#3B8686;width:960px;margin:0 auto;padding:20px 0;}
+      #author_photo a{font-size:25px;color:#0B486B;width:960px;margin:0 auto;padding-top:50px;}
+      #author_photo a:hover{text-shadow:0px 1px 0px #fff;-moz-text-shadow:0px 1px 0px #fff;-webkit-text-shadow:0px 1px 0px #fff;-o-text-shadow:0px 1px 0px #fff;-ms-text-shadow:0px 1px 0px #fff;}
