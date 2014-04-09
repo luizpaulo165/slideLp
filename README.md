@@ -196,6 +196,6 @@ O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar alg
 	<tr>	
 		<td>responsive</td>
 		<td>boolean</td>
-		<td>Ativa a função responsiva. Valor padrão "false".</td>
+		<td>Ativa a função responsiva. Valor padrão "true".</td>
 	</tr>
 </table>
