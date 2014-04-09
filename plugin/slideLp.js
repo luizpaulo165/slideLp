@@ -510,7 +510,7 @@ if(options.responsive){
         var width = $(this).width();    // Current image width
 
         self.css({
-          height: Math.round((width/16)*9)+"px"
+          width: Math.round((width/16)*9)+"px"
         });
              
       }); 
