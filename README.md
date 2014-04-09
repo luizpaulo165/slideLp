@@ -1,4 +1,4 @@
-Slide Lp Highlight - Lib jQuery + HTML5 + CSS3 + RESPONSIVO + TOUCH v2.0
+SlideLp v2.0 - Responsivo + Touch + Full Screen
 ===============================
 
 Este plugin está sendo desenvolvido para facilitar a vida de muitas pessoas que pretendem desenvolver um site e precisam de um banner de destaque.
