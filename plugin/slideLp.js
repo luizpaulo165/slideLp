@@ -44,11 +44,6 @@ $.fn.slideLp = function(options){
 	var $heightThis = $this.height();
 	var $widthThis = $this.width();
 
-	// $(".wrapHighlight").css({
-	// 	width: ""+ $widthThis +"px",
-	// 	height: ""+ $heightThis +"px"
-	// });
-
 	//ie
 	if (document.all && (!document.documentMode || (document.documentMode && document.documentMode == 8))) {
 	    options.touch = false;
@@ -869,14 +864,7 @@ if(options.responsive){
 					});
 				}
 			}
-			// if(options.auto){
-			// 	time = setInterval(animaPageVert, options.timeBanner);
-
-			// 	$this.parent().find(".pagHighlight a").click(function(){
-			// 		time = clearInterval(time);
-			// 		time = setInterval(animaPageVert, options.timeBanner);
-			// 	});
-			// }
+			
 			break;
 
 			case 'slide':
@@ -993,14 +981,7 @@ if(options.responsive){
 					});
 				}
 			}
-			// if(options.auto){
-			// 	time = setInterval(animaSlide, options.timeBanner);
-
-			// 	$this.parent().find(".pagHighlight a").click(function(){
-			// 		time = clearInterval(time);
-			// 		time = setInterval(animaSlide, options.timeBanner);
-			// 	});
-			// }
+		
 			break;
 		}
 	}
