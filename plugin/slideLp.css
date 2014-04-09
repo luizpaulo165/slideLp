@@ -29,5 +29,5 @@
     .title_lp{font-size:25px;color:#CF4647;background:#fff;display:inline;padding:10px;position:absolute;bottom:10px;left:0;box-shadow:3px 3px 6px rgba(0,0,0, 0.2);-moz-box-shadow:3px 3px 6px rgba(0,0,0, 0.2);-webkit-box-shadow:3px 3px 6px rgba(0,0,0, 0.2);-o-box-shadow:3px 3px 6px rgba(0,0,0, 0.2);-ms-box-shadow:3px 3px 6px rgba(0,0,0, 0.2);}
 
     /* responsiveLp */
-    .responsiveLp img{max-width:100%;}
+    .responsiveLp img{width:100%;}
 
