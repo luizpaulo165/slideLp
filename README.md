@@ -186,11 +186,16 @@ O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar alg
 	<tr>	
 		<td>fullScreen</td>
 		<td>boolean</td>
-		<td>Ativa a função full screen do plugin. Valor padrão "false".</td>
+		<td>Ativa a função full screen do plugin. <b>OBS: Para que o fullScreen funcione, é preciso que a tag que envolve o plugin tenha as dimensões do tamanho da tela, ou que o plugin não esteja dentro de nenhuma tag.</b> Valor padrão "false".</td>
 	</tr>
 	<tr>	
 		<td>adjustmentSize</td>
 		<td>integer</td>
 		<td>Funciona em conjunto com a função fullScreen. Com ele você pode ajustar o tamanho do plugin com mais precisão, com isso, fazendo ajustes mais precisos caso precise.</b> Valor padrão "0".</td>
+	</tr>
+	<tr>	
+		<td>responsive</td>
+		<td>boolean</td>
+		<td>Ativa a função responsiva. Valor padrão "false".</td>
 	</tr>
 </table>

@@ -34,7 +34,8 @@ $.fn.slideLp = function(options){
 		thresholdY: 100,
 		touchName: "",
 		fullScreen: false,
-		adjustmentSize: 0
+		adjustmentSize: 0,
+		responsive: false
 	}
 	options = $.extend(defaults, options);
 /*=====================================================
@@ -402,6 +403,7 @@ if(options.touch){
 }else{
 	null;
 }
+
 /*=====================================================
 	fullScreen
 ======================================================*/
@@ -488,7 +490,41 @@ if(options.fullScreen){
     }
   });
 
+}else{
+	null;
 }
+
+/*=====================================================
+	responsive
+======================================================*/
+if(options.responsive){
+    $this.parent().addClass("responsiveLp");
+
+    function responsive_lp(){
+    	$this.parent().each(function() {
+    		var self = $(this);
+        var width = $(this).width();    // Current image width
+
+        self.css({
+        	height: Math.round((width/16)*9)+"px"
+        });
+             
+			});	
+    }
+
+    $(window).bind({
+	    load: function() {
+	      responsive_lp();
+	    },
+	    resize: function() {
+	      responsive_lp();
+	    }
+	  });
+	
+}else{
+	null;
+}
+
 /*=====================================================
 	effects
 ======================================================*/
