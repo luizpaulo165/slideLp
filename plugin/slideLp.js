@@ -516,6 +516,7 @@ if(options.responsive){
              
       }); 
     }
+    responsive_lp();
 
     $(window).bind({
       load: function() {
