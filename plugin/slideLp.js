@@ -18,6 +18,8 @@ $.fn.slideLp = function(options){
     timeDelayIn: 500,
     timeDelayOut: 700,
     barCounter: false,
+    timerClock: true,
+    timerClockSize: 40,
     pagination: true,
     paginationThumb: false,
     thumbSizeWidth: 150,
@@ -216,6 +218,67 @@ if(options.barCounter && options.auto){
     display: "none"
   });
 }
+
+/*=====================================================
+  timerClock
+======================================================*/
+if(options.timerClock){
+  var $pieClock = "<div class='pieLp'><div class=timer fill'></div></div>";
+  
+      $this.parent().append($pieClock);
+
+      $this.parent().find('.pieLp').css({
+        width: options.timerClockSize+"px",
+        height: options.timerClockSize+"px"
+      });
+      $this.parent().find('.timer').css({
+        "font-size": options.timerClockSize+"px"
+      });
+
+      $this.parent().find('.timer #slice .pie').css({
+        "border-color": options.timerClockColorBorder
+      });
+
+      var timer;
+      var timerCurrent;
+      var timerFinish;
+      var timerSeconds;
+      function drawTimer(percent){
+        $this.parent().find('.timer').html('<div class="percent"></div><div id="slice"'+(percent > 50?' class="gt50"':'')+'><div class="pie"></div>'+(percent > 50?'<div class="pie fill"></div>':'')+'</div>');
+        var deg = 360/100*percent;
+        $this.parent().find('#slice .pie').css({
+          '-moz-transform':'rotate('+deg+'deg)',
+          '-webkit-transform':'rotate('+deg+'deg)',
+          '-o-transform':'rotate('+deg+'deg)',
+          'transform':'rotate('+deg+'deg)'
+        });
+        $this.parent().find('.percent').html(Math.round(percent)+'%');
+      }
+      function stopWatch(){
+        var seconds = (timerFinish-(new Date().getTime()))/1000;
+        if(seconds <= 0){
+          drawTimer(100);
+          clearInterval(timer);
+          //start
+          startClock();
+        }else{
+          var percent = 100-((seconds/timerSeconds)*100);
+          drawTimer(percent);
+        }
+      }
+      //start
+      function startClock(){
+          timerSeconds = options.timeBanner / 1000;
+          timerCurrent = 0;
+          timerFinish = new Date().getTime()+(timerSeconds*1000);
+          timer = setInterval(stopWatch,50);
+      }
+      startClock();
+
+}else{
+  null;
+}
+
 /*=====================================================
   navButtons
 ======================================================*/
@@ -241,6 +304,9 @@ if(options.navButtons){
       if(options.paginationCounter){
         counter();
       }
+      if(options.timerClock){
+        startClock();
+      }
 
       return false;
     }
@@ -260,6 +326,9 @@ if(options.navButtons){
 
       if(options.paginationCounter){
         counter();
+      }
+      if(options.timerClock){
+        startClock();
       }
 
       return false;
@@ -569,6 +638,9 @@ if(options.responsive){
             if(options.paginationCounter){
               counter();
             }
+            if(options.timerClock){
+              startClock();
+            }
           
             return false;
           },
@@ -617,6 +689,9 @@ if(options.responsive){
 
           if(options.paginationCounter){
             counter();
+          }
+          if(options.timerClock){
+            startClock();
           }
 
           return false;
@@ -677,6 +752,9 @@ if(options.responsive){
             if(options.paginationCounter){
               counter();
             }
+            if(options.timerClock){
+              startClock();
+            }
 
             return false;
           },
@@ -729,6 +807,9 @@ if(options.responsive){
           if(options.paginationCounter){
             counter();
           }
+          if(options.timerClock){
+            startClock();
+          }
 
           return false;
         }
@@ -746,14 +827,7 @@ if(options.responsive){
             });
           }
         }
-        // if(options.auto){
-        //  time = setInterval(animaPageHoriz, options.timeBanner);
-
-        //  $this.parent().find(".pagHighlight a").click(function(){
-        //    time = clearInterval(time);
-        //    time = setInterval(animaPageHoriz, options.timeBanner);
-        //  });
-        // }
+      
       break;
 
       case 'pageVert':
@@ -805,6 +879,9 @@ if(options.responsive){
 
           if(options.paginationCounter){
             counter();
+          }
+          if(options.timerClock){
+            startClock();
           }
 
           return false;
@@ -858,6 +935,9 @@ if(options.responsive){
         if(options.paginationCounter){
           counter();
         }
+        if(options.timerClock){
+          startClock();
+        }
 
         return false;
       }
@@ -875,14 +955,7 @@ if(options.responsive){
           });
         }
       }
-      // if(options.auto){
-      //  time = setInterval(animaPageVert, options.timeBanner);
 
-      //  $this.parent().find(".pagHighlight a").click(function(){
-      //    time = clearInterval(time);
-      //    time = setInterval(animaPageVert, options.timeBanner);
-      //  });
-      // }
       break;
 
       case 'slide':
@@ -936,6 +1009,9 @@ if(options.responsive){
           if(options.paginationCounter){
             counter();
           }
+          if(options.timerClock){
+            startClock();
+          }
 
           return false;
         },
@@ -982,6 +1058,9 @@ if(options.responsive){
         if(options.paginationCounter){
           counter();
         }
+        if(options.timerClock){
+          startClock();
+        }
 
         return false;
       }
@@ -999,14 +1078,6 @@ if(options.responsive){
           });
         }
       }
-      // if(options.auto){
-      //  time = setInterval(animaSlide, options.timeBanner);
-
-      //  $this.parent().find(".pagHighlight a").click(function(){
-      //    time = clearInterval(time);
-      //    time = setInterval(animaSlide, options.timeBanner);
-      //  });
-      // }
       break;
     }
   }

@@ -124,6 +124,16 @@ O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar alg
 		<td>Barra onde conta o tempo que resta para cada transição. Valor padrão "false".</td>
 	</tr>
 	<tr>	
+		<td>timerClock</td>
+		<td>boolean</td>
+		<td>Relógio onde conta o tempo que resta para cada transição. Valor padrão "true".</td>
+	</tr>
+	<tr>	
+		<td>timerClockSize</td>
+		<td>integer</td>
+		<td>Tamanho do relógio. Valor padrão "40".</td>
+	</tr>
+	<tr>	
 		<td>pagination</td>
 		<td>boolean</td>
 		<td>Serve para ativar ou desativar a paginação do plugin. Valor padrão "true".</td>
