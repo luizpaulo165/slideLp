@@ -5,6 +5,10 @@ Este plugin está sendo desenvolvido para facilitar a vida de muitas pessoas que
 
 Ainda estamos na versão 1.0, portanto existem algumas propriedades que ainda não foram desenvolvidas. Existem também alguns bugs a serem corrigidos, por favos, caso encontre algum, comentar o ocorrido para que possamos corrigi-los.
 
+Demo
+===============================
+Veja ele em funcionamento clicando <a href="http://slidelp.mostone.com.br" target="blank">aqui</a>
+
 Como usar
 ===============================
 
