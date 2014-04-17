@@ -37,7 +37,10 @@ $.fn.slideLp = function(options){
     touchName: "",
     fullScreen: false,
     adjustmentSize: 0,
-    responsive: true
+    responsive: true,
+    concertinaWidth: 25,
+    concertinaMaxWidth: 64,
+    concertinaMinWidth: 12
   }
   options = $.extend(defaults, options);
 /*=====================================================
@@ -976,7 +979,7 @@ if(options.responsive){
       $li.css({
         float: "left",
         position: "relative",
-        width: $this.width()
+        width: $this.width() + "px"
       });
 
       //width $listCont
@@ -1080,7 +1083,107 @@ if(options.responsive){
       }
       break;
 
+      case 'concertina':
+      /*=====================================================
+        Concertina
+      ======================================================*/
+      //vars
+      var $listCont = $this.find(".listCont");
+      var $li = $listCont.find("li");
+      var $liCont = $li.find(".cont");
+      var $linkPag = $this.parent().find(".pagHighlight a");
+
+      $this.parent().removeClass('responsiveLp');
+      $this.parent().addClass('concertinaRespLp');
+
+
+      $liCont.css({
+        width: "100%",
+        height: "100%"
+      });
+
+      var $liW = options.concertinaWidth;
+      $li.css({
+        float: "left",
+        position: "relative",
+        width: $liW + "%"
+      });
+
+      // z-index $li
+      var contZ = 0;
+      $li.each(function(){
+        var $self = $(this),
+            $altImg = $self.find('img').attr('alt');
+            $liTitleBox = "<div class='titleBox_lp'><h3>"+ $altImg +"</h3></div>";
+
+        contZ += 1;
+        $self.css({
+          "z-index": contZ 
+        });
+
+        // title box
+        $self.find('.cont').append($liTitleBox);
+
+      });
+
+      //ul size
+      $widthUl = $li.outerWidth() * $li.length;
+      $listCont.css({
+        width: $widthUl + "px"
+      });
+
+      $listCont.find("li:first").addClass("active");
+
+      $this.find('.title_lp').stop(false,false).hide();
+
+      $this.parent().find('.pieLp, .pagHighlight, .nextButton, .prevButton').hide();
+
+      $li.bind({
+        mouseenter: function(){
+          var $self = $(this);
+          var $selfPosition = $self.data("position");
+
+          $li.removeClass('expanded').addClass('compress');
+          $self.removeClass('compress').addClass('expanded');
+
+          $this.find(".listCont .compress").stop(false,false).animate({
+            width: options.concertinaMinWidth + "%"
+          },options.timeDelayIn,function(){
+            $this.find('.title_lp').fadeOut(options.timeDelayOut);
+          });
+          $this.find(".listCont .expanded").stop(false,false).animate({
+            width: options.concertinaMaxWidth + "%"
+          },options.timeDelayIn,function(){
+            $this.find('.title_lp').fadeIn(options.timeDelayIn);
+          });
+
+          $listCont.css({
+            width: $widthUl + "px"
+          });
+
+          return false;
+        },
+        mouseleave: function(){
+          var linkThis = $(this),
+              contThisLink = linkThis.html(),
+              linkPosition= linkThis.position();
+
+          $this.find('.title_lp').stop(false,false).hide();
+
+          $li.removeClass('expanded').removeClass('compress');
+
+          $li.stop(false,false).animate({
+            width: $liW + "%"
+          },options.timeDelayOut);
+
+          $listCont.css({
+            width: $widthUl + "px"
+          });
+
+        }
+      });
       
+      break;
 
     }
   }
@@ -1088,8 +1191,8 @@ if(options.responsive){
 /*=====================================================
   verifications
 ======================================================*/
-   if($this.find('.listCont li').length <= 1){
-      $this.parent().find('.pieLp, .pagHighlight, .nextButton, .prevButton').hide();
-    }// end
+ if($this.find('.listCont li').length <= 1){
+    $this.parent().find('.pieLp, .pagHighlight, .nextButton, .prevButton').hide();
+  }// end
 }
 })(jQuery);

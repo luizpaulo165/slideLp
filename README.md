@@ -39,26 +39,34 @@ Html base do plugin:
           <ul class="listCont">
             <li>
               <div class="cont">
-                <img src="imgs/img1.jpg" />
-                <div class="title_lp">Título da Imagem</div>
+                <a href="http://bakea.tumblr.com/image/31509459244" target="_blank">
+                  <img src="imgs/img4.jpg" alt="Imagem 1"/>
+                  <div class="title_lp">Título da Imagem 1</div>
+                </a>
               </div>
             </li><!-- block -->
             <li>
               <div class="cont">
-                <img src="imgs/img2.jpg" />
-                <div class="title_lp">Título da Imagem</div>
+                <a href="http://bakea.tumblr.com/image/69089253161" target="_blank">
+                  <img src="imgs/img2.jpg" alt="Imagem 2"/>
+                  <div class="title_lp">Título da Imagem 2</div>
+                </a>
               </div>
             </li><!-- block -->
             <li>
               <div class="cont">
-                <img src="imgs/img3.jpg" />
-                <div class="title_lp">Título da Imagem</div>
+                <a href="http://bakea.tumblr.com/image/63509446428" target="_blank">
+                  <img src="imgs/img3.jpg" alt="Imagem 3"/>
+                  <div class="title_lp">Título da Imagem 3</div>
+                </a>
               </div>
             </li><!-- block -->
             <li>
               <div class="cont">
-                <img src="imgs/img4.jpg" />
-                <div class="title_lp">Título da Imagem</div>
+                <a href="http://bakea.tumblr.com/image/41854612172" target="_blank">
+                  <img src="imgs/img1.jpg" alt="Imagem 4"/>
+                  <div class="title_lp">Título da Imagem 4</div>
+                </a>
               </div>
             </li><!-- block -->
           </ul>
