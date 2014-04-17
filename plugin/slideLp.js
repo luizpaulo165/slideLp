@@ -10,7 +10,7 @@ $.fn.slideLp = function(options){
   options
 ======================================================*/
   var defaults = {
-    effects: "fade", //"pageHoriz", "slide", "fade", "pageVert"
+    effects: "concertina", //"pageHoriz", "slide", "fade", "pageVert", "concertina"
     auto: true,
     timeBanner: 7000,
     timeDelay: 500,
@@ -224,8 +224,8 @@ if(options.barCounter && options.auto){
 ======================================================*/
 if(options.timerClock){
   var $pieClock = "<div class='pieLp'><div class=timer fill'></div></div>";
-  
-      $this.parent().append($pieClock);
+
+    $this.parent().append($pieClock);
 
       $this.parent().find('.pieLp').css({
         width: options.timerClockSize+"px",
@@ -610,7 +610,7 @@ if(options.responsive){
           fade
         ======================================================*/
         //vars
-        var $listCont = $this.children(".listCont");
+        var $listCont = $this.find(".listCont");
         var $li = $listCont.find("li");
         var $liCont = $li.find(".cont");
         var $linkPag = $this.parent().find(".pagHighlight a");
@@ -717,7 +717,7 @@ if(options.responsive){
           pageHoriz
         ======================================================*/
         //vars
-        var $listCont = $this.children(".listCont");
+        var $listCont = $this.find(".listCont");
         var $li = $listCont.find("li");
         var $liCont = $li.find(".cont");
         var $linkPag = $this.parent().find(".pagHighlight a");
@@ -835,7 +835,7 @@ if(options.responsive){
         pageVert
       ======================================================*/
       //vars
-      var $listCont = $this.children(".listCont");
+      var $listCont = $this.find(".listCont");
       var $li = $listCont.find("li");
       var $liCont = $li.find(".cont");
       var $linkPag = $this.parent().find(".pagHighlight a");
@@ -963,7 +963,7 @@ if(options.responsive){
         Slide
       ======================================================*/
       //vars
-      var $listCont = $this.children(".listCont");
+      var $listCont = $this.find(".listCont");
       var $li = $listCont.find("li");
       var $liCont = $li.find(".cont");
       var $linkPag = $this.parent().find(".pagHighlight a");
@@ -1079,12 +1079,17 @@ if(options.responsive){
         }
       }
       break;
+
+      
+
     }
   }
   motion(options.effects);
 /*=====================================================
   verifications
 ======================================================*/
-  
+   if($this.find('.listCont li').length <= 1){
+      $this.parent().find('.pieLp, .pagHighlight, .nextButton, .prevButton').hide();
+    }// end
 }
 })(jQuery);
