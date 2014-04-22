@@ -10,7 +10,7 @@ $.fn.slideLp = function(options){
   options
 ======================================================*/
   var defaults = {
-    effects: "fade", //"pageHoriz", "slide", "fade", "pageVert", "concertina"
+    effects: "concertina", //"pageHoriz", "slide", "fade", "pageVert", "concertina"
     auto: true,
     timeBanner: 7000,
     timeDelay: 500,
@@ -39,7 +39,7 @@ $.fn.slideLp = function(options){
     adjustmentSize: 0,
     responsive: true,
     concertinaMaxWidth: 64,
-    concertinaAdjustmentFloatFloat: "-0.5"
+    concertinaAdjustmentFloat: "-0.5"
   }
   options = $.extend(defaults, options);
 /*=====================================================
@@ -1100,6 +1100,7 @@ if(options.responsive){
         width: "100%",
         height: "100%"
       });
+
       var $liW = Math.round((($listCont.width() / $li.length)/10)+1);
       $li.css({
         float: "left",
@@ -1125,11 +1126,7 @@ if(options.responsive){
 
       });
 
-      //ul size
-      $widthUl = $li.outerWidth() * $li.length;
-      $listCont.css({
-        width: $widthUl + "px"
-      });
+      
 
       $listCont.find("li:first").addClass("active");
 
