@@ -10,7 +10,7 @@ $.fn.slideLp = function(options){
   options
 ======================================================*/
   var defaults = {
-    effects: "concertina", //"pageHoriz", "slide", "fade", "pageVert", "concertina"
+    effects: "fade", //"pageHoriz", "slide", "fade", "pageVert", "concertina"
     auto: true,
     timeBanner: 7000,
     timeDelay: 500,
@@ -1150,27 +1150,26 @@ if(options.responsive){
           $this.find(".listCont .compress").stop(false,false).animate({
             width: $liHover + "%"
           },options.timeDelayIn,function(){
-            $this.find('.title_lp').fadeOut(options.timeDelayOut);
-            $li.find('.titleBox_lp').fadeIn(options.timeDelayIn);
+            $this.find('.title_lp').stop(false,false).fadeOut(options.timeDelayOut);
           });
           
           $this.find(".listCont .expanded").stop(false,false).animate({
             width: Math.round(options.concertinaMaxWidth) + "%"
           },options.timeDelayIn,function(){
-            $this.find('.title_lp').fadeIn(options.timeDelayIn);
-            $li.find('.titleBox_lp').fadeOut(options.timeDelayIn);
+            $this.find('.title_lp').stop(false,false).fadeIn(options.timeDelayIn);
           });
-
+          
+          $this.find(".titleBox_lp").stop(false,false).fadeOut(options.timeDelayOut);
+          
           return false;
         },
         mouseleave: function(){
-          var linkThis = $(this),
-              contThisLink = linkThis.html(),
-              linkPosition= linkThis.position();
+          var $linkThis = $(this),
+              contThisLink = $linkThis.html(),
+              linkPosition= $linkThis.position();
 
           $this.find('.title_lp').stop(false,false).hide();
-          console.log(linkThis)
-          linkThis.find('.titleBox_lp').stop(false,false).hide();
+          $this.find(".titleBox_lp").stop(false,false).hide();
 
           $li.removeClass('expanded').removeClass('compress');
 
@@ -1183,7 +1182,8 @@ if(options.responsive){
             width: $liW + "%"
           },options.timeDelayOut);
 
-          $this.find('.titleBox_lp').stop(false,false).show();
+          $this.find(".titleBox_lp").stop(false,false).fadeIn(options.timeDelayIn);
+         
 
         }
       });
