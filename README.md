@@ -103,7 +103,7 @@ O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar alg
 	<tr>	
 		<td>effects</td>
 		<td>string</td>
-		<td>Existem dois tipos de efeito: "slide", "fade", "pageVert", "pageHoriz"</td>
+		<td>Existem dois tipos de efeito: "concertina", "slide", "fade", "pageVert", "pageHoriz"</td>
 	</tr>
 	<tr>	
 		<td>auto</td>
@@ -220,4 +220,14 @@ O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar alg
 		<td>boolean</td>
 		<td>Ativa a função responsiva. Valor padrão "true".</td>
 	</tr>
+  <tr>  
+    <td>concertinaMaxWidth</td>
+    <td>integer</td>
+    <td>Trabalha em conjunto com a opção de efeito "concertina". Com ele passamos o valor de abertuda da tag quando o mouse está na posição hover. <b>OBS: Esse valor é em porcento, ou seja, o seu valor máximo é de 100.</b> Valor padrão "64".</td>
+  </tr>
+  <tr>  
+    <td>concertinaAdjustmentFloat</td>
+    <td>string</td>
+    <td>Trabalha em conjunto com a opção de efeito "concertina". Com ele fazemos o ajuste do float na imagem, subitraindo ou almentando a distancia do float das imagens. Valor padrão "-0.5".</td>
+  </tr>
 </table>

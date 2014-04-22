@@ -261,6 +261,14 @@
     bottom:300px!important;
     left:300px!important;
 }
+.concertinaRespLp .compress{
+    opacity:0.5;
+    filter: alpha(opacity=50);
+}
+.concertinaRespLp .expanded{
+    opacity:1.0;
+    filter: alpha(opacity=100);
+}
 
 
 /* pieLp */

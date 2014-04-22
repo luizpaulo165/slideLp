@@ -38,9 +38,8 @@ $.fn.slideLp = function(options){
     fullScreen: false,
     adjustmentSize: 0,
     responsive: true,
-    concertinaWidth: 25,
     concertinaMaxWidth: 64,
-    concertinaMinWidth: 12
+    concertinaAdjustmentFloatFloat: "-0.5"
   }
   options = $.extend(defaults, options);
 /*=====================================================
@@ -1101,12 +1100,12 @@ if(options.responsive){
         width: "100%",
         height: "100%"
       });
-
-      var $liW = options.concertinaWidth;
+      var $liW = Math.round((($listCont.width() / $li.length)/10)+1);
       $li.css({
         float: "left",
         position: "relative",
-        width: $liW + "%"
+        width: $liW + "%",
+        "margin-right": options.concertinaAdjustmentFloat+"px"
       });
 
       // z-index $li
@@ -1140,25 +1139,26 @@ if(options.responsive){
 
       $li.bind({
         mouseenter: function(){
-          var $self = $(this);
-          var $selfPosition = $self.data("position");
+          var $linkThis = $(this);
+          var $selfPosition = $linkThis.data("position");
 
           $li.removeClass('expanded').addClass('compress');
-          $self.removeClass('compress').addClass('expanded');
+          $linkThis.removeClass('compress').addClass('expanded');
+
+          var $liHover = Math.round( (100 - options.concertinaMaxWidth) / ($li.length-1) );
 
           $this.find(".listCont .compress").stop(false,false).animate({
-            width: options.concertinaMinWidth + "%"
+            width: $liHover + "%"
           },options.timeDelayIn,function(){
             $this.find('.title_lp').fadeOut(options.timeDelayOut);
+            $li.find('.titleBox_lp').fadeIn(options.timeDelayIn);
           });
+          
           $this.find(".listCont .expanded").stop(false,false).animate({
-            width: options.concertinaMaxWidth + "%"
+            width: Math.round(options.concertinaMaxWidth) + "%"
           },options.timeDelayIn,function(){
             $this.find('.title_lp').fadeIn(options.timeDelayIn);
-          });
-
-          $listCont.css({
-            width: $widthUl + "px"
+            $li.find('.titleBox_lp').fadeOut(options.timeDelayIn);
           });
 
           return false;
@@ -1169,16 +1169,21 @@ if(options.responsive){
               linkPosition= linkThis.position();
 
           $this.find('.title_lp').stop(false,false).hide();
+          console.log(linkThis)
+          linkThis.find('.titleBox_lp').stop(false,false).hide();
 
           $li.removeClass('expanded').removeClass('compress');
+
+        }
+      });
+      $this.parent().bind({
+        mouseleave: function(){
 
           $li.stop(false,false).animate({
             width: $liW + "%"
           },options.timeDelayOut);
 
-          $listCont.css({
-            width: $widthUl + "px"
-          });
+          $this.find('.titleBox_lp').stop(false,false).show();
 
         }
       });
