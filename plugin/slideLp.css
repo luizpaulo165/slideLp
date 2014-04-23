@@ -269,7 +269,7 @@
     opacity:1.0;
     filter: alpha(opacity=100);
 }
-
+.concertinaRespLp img{height:100%;}
 
 /* pieLp */
 .pieLp {
@@ -357,4 +357,3 @@
     width: 1em;
     height: 1em; 
 }
-

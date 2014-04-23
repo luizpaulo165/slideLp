@@ -31,7 +31,7 @@ blockquote, q{ quotes: "" ""}
 /* =============================================================================
    Geral
    ========================================================================== */
-   #container{width:960px;display:block;margin:0 auto;padding:0 10px;overflow:hidden;}
+   #container{width:75%;display:block;margin:0 auto;padding:0 10px;overflow:hidden;}
 
    #logo{font-family: 'Nova Square', cursive;display:block;margin-bottom:30px;padding:12px;position:relative;clear:both;overflow:hidden;}
       #logo figure{position:relative;}

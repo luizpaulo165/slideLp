@@ -10,7 +10,7 @@ $.fn.slideLp = function(options){
   options
 ======================================================*/
   var defaults = {
-    effects: "concertina", //"pageHoriz", "slide", "fade", "pageVert", "concertina"
+    effects: "slide", //"pageHoriz", "slide", "fade", "pageVert", "concertina"
     auto: true,
     timeBanner: 7000,
     timeDelay: 500,
@@ -18,8 +18,6 @@ $.fn.slideLp = function(options){
     timeDelayIn: 500,
     timeDelayOut: 700,
     barCounter: false,
-    timerClock: true,
-    timerClockSize: 40,
     pagination: true,
     paginationThumb: false,
     thumbSizeWidth: 150,
@@ -220,67 +218,6 @@ if(options.barCounter && options.auto){
     display: "none"
   });
 }
-
-/*=====================================================
-  timerClock
-======================================================*/
-if(options.timerClock){
-  var $pieClock = "<div class='pieLp'><div class=timer fill'></div></div>";
-
-    $this.parent().append($pieClock);
-
-      $this.parent().find('.pieLp').css({
-        width: options.timerClockSize+"px",
-        height: options.timerClockSize+"px"
-      });
-      $this.parent().find('.timer').css({
-        "font-size": options.timerClockSize+"px"
-      });
-
-      $this.parent().find('.timer #slice .pie').css({
-        "border-color": options.timerClockColorBorder
-      });
-
-      var timer;
-      var timerCurrent;
-      var timerFinish;
-      var timerSeconds;
-      function drawTimer(percent){
-        $this.parent().find('.timer').html('<div class="percent"></div><div id="slice"'+(percent > 50?' class="gt50"':'')+'><div class="pie"></div>'+(percent > 50?'<div class="pie fill"></div>':'')+'</div>');
-        var deg = 360/100*percent;
-        $this.parent().find('#slice .pie').css({
-          '-moz-transform':'rotate('+deg+'deg)',
-          '-webkit-transform':'rotate('+deg+'deg)',
-          '-o-transform':'rotate('+deg+'deg)',
-          'transform':'rotate('+deg+'deg)'
-        });
-        $this.parent().find('.percent').html(Math.round(percent)+'%');
-      }
-      function stopWatch(){
-        var seconds = (timerFinish-(new Date().getTime()))/1000;
-        if(seconds <= 0){
-          drawTimer(100);
-          clearInterval(timer);
-          //start
-          startClock();
-        }else{
-          var percent = 100-((seconds/timerSeconds)*100);
-          drawTimer(percent);
-        }
-      }
-      //start
-      function startClock(){
-          timerSeconds = options.timeBanner / 1000;
-          timerCurrent = 0;
-          timerFinish = new Date().getTime()+(timerSeconds*1000);
-          timer = setInterval(stopWatch,50);
-      }
-      startClock();
-
-}else{
-  null;
-}
-
 /*=====================================================
   navButtons
 ======================================================*/
@@ -306,9 +243,6 @@ if(options.navButtons){
       if(options.paginationCounter){
         counter();
       }
-      if(options.timerClock){
-        startClock();
-      }
 
       return false;
     }
@@ -328,9 +262,6 @@ if(options.navButtons){
 
       if(options.paginationCounter){
         counter();
-      }
-      if(options.timerClock){
-        startClock();
       }
 
       return false;
@@ -612,7 +543,7 @@ if(options.responsive){
           fade
         ======================================================*/
         //vars
-        var $listCont = $this.find(".listCont");
+        var $listCont = $this.children(".listCont");
         var $li = $listCont.find("li");
         var $liCont = $li.find(".cont");
         var $linkPag = $this.parent().find(".pagHighlight a");
@@ -639,9 +570,6 @@ if(options.responsive){
 
             if(options.paginationCounter){
               counter();
-            }
-            if(options.timerClock){
-              startClock();
             }
           
             return false;
@@ -692,9 +620,6 @@ if(options.responsive){
           if(options.paginationCounter){
             counter();
           }
-          if(options.timerClock){
-            startClock();
-          }
 
           return false;
         }
@@ -719,7 +644,7 @@ if(options.responsive){
           pageHoriz
         ======================================================*/
         //vars
-        var $listCont = $this.find(".listCont");
+        var $listCont = $this.children(".listCont");
         var $li = $listCont.find("li");
         var $liCont = $li.find(".cont");
         var $linkPag = $this.parent().find(".pagHighlight a");
@@ -753,9 +678,6 @@ if(options.responsive){
 
             if(options.paginationCounter){
               counter();
-            }
-            if(options.timerClock){
-              startClock();
             }
 
             return false;
@@ -809,9 +731,6 @@ if(options.responsive){
           if(options.paginationCounter){
             counter();
           }
-          if(options.timerClock){
-            startClock();
-          }
 
           return false;
         }
@@ -829,7 +748,14 @@ if(options.responsive){
             });
           }
         }
-      
+        // if(options.auto){
+        //  time = setInterval(animaPageHoriz, options.timeBanner);
+
+        //  $this.parent().find(".pagHighlight a").click(function(){
+        //    time = clearInterval(time);
+        //    time = setInterval(animaPageHoriz, options.timeBanner);
+        //  });
+        // }
       break;
 
       case 'pageVert':
@@ -837,7 +763,7 @@ if(options.responsive){
         pageVert
       ======================================================*/
       //vars
-      var $listCont = $this.find(".listCont");
+      var $listCont = $this.children(".listCont");
       var $li = $listCont.find("li");
       var $liCont = $li.find(".cont");
       var $linkPag = $this.parent().find(".pagHighlight a");
@@ -881,9 +807,6 @@ if(options.responsive){
 
           if(options.paginationCounter){
             counter();
-          }
-          if(options.timerClock){
-            startClock();
           }
 
           return false;
@@ -937,9 +860,6 @@ if(options.responsive){
         if(options.paginationCounter){
           counter();
         }
-        if(options.timerClock){
-          startClock();
-        }
 
         return false;
       }
@@ -957,7 +877,14 @@ if(options.responsive){
           });
         }
       }
+      // if(options.auto){
+      //  time = setInterval(animaPageVert, options.timeBanner);
 
+      //  $this.parent().find(".pagHighlight a").click(function(){
+      //    time = clearInterval(time);
+      //    time = setInterval(animaPageVert, options.timeBanner);
+      //  });
+      // }
       break;
 
       case 'slide':
@@ -965,20 +892,34 @@ if(options.responsive){
         Slide
       ======================================================*/
       //vars
-      var $listCont = $this.find(".listCont");
+      var $listCont = $this.children(".listCont");
       var $li = $listCont.find("li");
       var $liCont = $li.find(".cont");
       var $linkPag = $this.parent().find(".pagHighlight a");
+      var $liW = 0;
 
       $liCont.css({
         width: "100%",
         height: "100%"
       }); 
 
-      $li.css({
-        float: "left",
-        position: "relative",
-        width: $this.width() + "px"
+      function liSizeWidth(){
+        $liW = $this.parent().width();
+        $li.css({
+          float: "left",
+          position: "relative",
+          width: $liW + "px"
+        });
+      }
+      liSizeWidth();
+
+      $(window).bind({
+        load: function(){
+          liSizeWidth();
+        },
+        resize: function(){
+          liSizeWidth();
+        }
       });
 
       //width $listCont
@@ -1010,9 +951,6 @@ if(options.responsive){
 
           if(options.paginationCounter){
             counter();
-          }
-          if(options.timerClock){
-            startClock();
           }
 
           return false;
@@ -1060,9 +998,6 @@ if(options.responsive){
         if(options.paginationCounter){
           counter();
         }
-        if(options.timerClock){
-          startClock();
-        }
 
         return false;
       }
@@ -1080,6 +1015,7 @@ if(options.responsive){
           });
         }
       }
+      
       break;
 
       case 'concertina':
@@ -1091,6 +1027,7 @@ if(options.responsive){
       var $li = $listCont.find("li");
       var $liCont = $li.find(".cont");
       var $linkPag = $this.parent().find(".pagHighlight a");
+       var $liW = 0;
 
       $this.parent().removeClass('responsiveLp');
       $this.parent().addClass('concertinaRespLp');
@@ -1098,10 +1035,13 @@ if(options.responsive){
 
       $liCont.css({
         width: "100%",
-        height: "100%"
+        height: "102%"
       });
 
-      var $liW = Math.round((($listCont.width() / $li.length)/10)+1);
+    
+      $liW = Math.round(((100 / $li.length)));
+
+      console.log($liW)
       $li.css({
         float: "left",
         position: "relative",
@@ -1109,6 +1049,7 @@ if(options.responsive){
         "margin-right": options.concertinaAdjustmentFloat+"px"
       });
 
+     
       // z-index $li
       var contZ = 0;
       $li.each(function(){
@@ -1133,6 +1074,7 @@ if(options.responsive){
       $this.find('.title_lp').stop(false,false).hide();
 
       $this.parent().find('.pieLp, .pagHighlight, .nextButton, .prevButton').hide();
+
 
       $li.bind({
         mouseenter: function(){
@@ -1178,6 +1120,7 @@ if(options.responsive){
           $li.stop(false,false).animate({
             width: $liW + "%"
           },options.timeDelayOut);
+          console.log($liW)
 
           $this.find(".titleBox_lp").stop(false,false).fadeIn(options.timeDelayIn);
          
@@ -1193,8 +1136,6 @@ if(options.responsive){
 /*=====================================================
   verifications
 ======================================================*/
- if($this.find('.listCont li').length <= 1){
-    $this.parent().find('.pieLp, .pagHighlight, .nextButton, .prevButton').hide();
-  }// end
+  
 }
 })(jQuery);
