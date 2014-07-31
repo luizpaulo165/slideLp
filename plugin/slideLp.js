@@ -40,6 +40,7 @@ $.fn.slideLp = function(options){
     concertinaMaxWidth: 64,
     concertinaAdjustmentFloat: "-0.5",
     glassPositionStart: 1
+
   }
   options = $.extend(defaults, options);
 /*=====================================================
