@@ -10,7 +10,7 @@ $.fn.slideLp = function(options){
   options
 ======================================================*/
   var defaults = {
-    effects: "glass", //"pageHoriz", "slide", "fade", "pageVert", "concertina", "glass"
+    effects: "fade", //"pageHoriz", "slide", "fade", "pageVert", "concertina", "glass"
     auto: false,
     timeBanner: 2000,
     timeDelay: 500,
@@ -36,6 +36,7 @@ $.fn.slideLp = function(options){
     fullScreen: false,
     adjustmentSize: 0,
     responsive: true,
+    adjustmentResponsiveHeight: 2,
     concertinaMaxWidth: 64,
     concertinaAdjustmentFloat: "-0.5",
     glassPositionStart: 1
@@ -537,32 +538,30 @@ if(options.fullScreen){
 
 /*=====================================================
   responsive
-======================================================*/
-if(options.responsive){
+  ======================================================*/
+  if(options.responsive){
     $this.parent().addClass("responsiveLp");
 
     function responsive_lp(){
-      $this.parent().each(function() {
-        var self = $(this);
-        var width = $(this).width();    // Current image width
+      var $self = $this.parent();
+      var $width = $self.outerWidth();    // Current image width
+      var $height = Math.round( (($width/16)*9) / options.adjustmentResponsiveHeight );    // Current image width
 
-        self.css({
-          width: "100%",
-          height: Math.round((width/16)*9)+"px"
-        });
+      $self.css({
+        width: 100 + options.adjustmentSize + "%",
+        height: $height +"px"
+    });
+  }
+  responsive_lp();
 
-      });
-    }
-    responsive_lp();
-
-    $(window).bind({
+  $(window).bind({
       load: function() {
         responsive_lp();
-      },
-      resize: function() {
+    },
+    resize: function() {
         responsive_lp();
-      }
-    });
+    }
+});
 
 }else{
   null;
@@ -912,14 +911,7 @@ if(options.responsive){
           });
         }
       }
-      // if(options.auto){
-      //  time = setInterval(animaPageVert, options.timeBanner);
 
-      //  $this.parent().find(".pagHighlight a").click(function(){
-      //    time = clearInterval(time);
-      //    time = setInterval(animaPageVert, options.timeBanner);
-      //  });
-      // }
       break;
 
       case 'slide':
