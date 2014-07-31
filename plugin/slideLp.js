@@ -4,15 +4,15 @@ $.fn.slideLp = function(options){
   var $this = $(this);
 
   $this.each(function(){
-    $this = $(this).find(".wrapHighlight"); 
+    $this = $(this).find(".wrapHighlight");
   });
 /*=====================================================
   options
 ======================================================*/
   var defaults = {
-    effects: "slide", //"pageHoriz", "slide", "fade", "pageVert", "concertina"
-    auto: true,
-    timeBanner: 7000,
+    effects: "glass", //"pageHoriz", "slide", "fade", "pageVert", "concertina", "glass"
+    auto: false,
+    timeBanner: 2000,
     timeDelay: 500,
     timeSlide: 800,
     timeDelayIn: 500,
@@ -37,7 +37,8 @@ $.fn.slideLp = function(options){
     adjustmentSize: 0,
     responsive: true,
     concertinaMaxWidth: 64,
-    concertinaAdjustmentFloat: "-0.5"
+    concertinaAdjustmentFloat: "-0.5",
+    glassPositionStart: 1
   }
   options = $.extend(defaults, options);
 /*=====================================================
@@ -150,7 +151,7 @@ if(options.pagination){
       $.each($this.find(".listCont li"),function(index){
         //$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
       });
-    }else{  
+    }else{
       $.each($this.find(".listCont li"),function(index){
         $pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
       });
@@ -208,7 +209,7 @@ if(options.barCounter && options.auto){
     }
   });
 
-  
+
 
 }else{
   var $wrapCounter = "<div id='wrapCounter'><div class='counterLine'>1</div></div>";
@@ -244,6 +245,21 @@ if(options.navButtons){
         counter();
       }
 
+      if(options.effects === "glass"){
+        var $listCont = $this.find('.listCont');
+        var firstLi = $listCont.find('li').eq(0).clone();
+
+        $listCont.stop(true,true).animate({
+          'margin-left': "-=" + Math.round($listCont.find('li').outerWidth()) +"px"
+        },options.timeSlide, function(){
+          $listCont.find('li').eq(0).remove();
+          $listCont.stop(true,true).animate({
+            'margin-left': "+=" + Math.round($listCont.find('li').outerWidth()) +"px"
+          },0);
+          $listCont.append(firstLi);
+        });
+      }
+
       return false;
     }
   });
@@ -264,11 +280,26 @@ if(options.navButtons){
         counter();
       }
 
+      if(options.effects === "glass"){
+        var $listCont = $this.find('.listCont');
+        var lastLi = $listCont.find('li:last').clone();
+
+        $listCont.stop(true,true).animate({
+          'margin-left': "+=" + Math.round($listCont.find('li').outerWidth()) +"px"
+        },options.timeSlide, function(){
+          $listCont.find('li:last').remove();
+          $listCont.stop(true,true).animate({
+            'margin-left': "-=" + Math.round($listCont.find('li').outerWidth()) +"px"
+          },0);
+          $listCont.prepend(lastLi);
+        });
+      }
+
       return false;
     }
   });
 
-}else{  
+}else{
   null;
 }
 
@@ -298,7 +329,7 @@ if(options.paginationCounter){
   }
   counter();
   $this.parent().find(".lp_counter .quant_photo").text($lengthLi);
-  
+
 }else{
   null;
 }
@@ -320,6 +351,8 @@ if(options.keyboard){
 
       $self.next().addClass("active").click().prev().removeClass("active");
 
+      $this.parent().find('.nextButton').click();
+
       return false;
       }else if(e.which == 37){
         var $self = $this.parent().find(".pagHighlight .active");
@@ -330,6 +363,8 @@ if(options.keyboard){
       }
 
       $self.prev().addClass("active").click().next().removeClass("active");
+
+      $this.parent().find('.prevButton').click();
 
       return false;
       }
@@ -405,7 +440,7 @@ if(options.touch){
       this.addEventListener("touchend", touchEnd, false);
       this.addEventListener("touchcancel", touchCancel, false);
     });
-  
+
 }else{
   null;
 }
@@ -414,7 +449,7 @@ if(options.touch){
   fullScreen
 ======================================================*/
 if(options.fullScreen){
-  
+
   var win = $(window),
       fullscreen = $this.parent(),
       div = $this,
@@ -430,7 +465,7 @@ if(options.fullScreen){
     var winWidth = win.width(),
         winHeight = win.height(),
         winRatio = winWidth / winHeight;
-  
+
     if(winRatio > imageRatio) {
       fullscreen.css({
         width: winWidth,
@@ -458,7 +493,7 @@ if(options.fullScreen){
         height: "auto"
       });
     }else {
-      
+
       fullscreen.css({
         width: Math.round((winWidth - imageRatio) + options.adjustmentSize),
         height: winHeight
@@ -515,8 +550,8 @@ if(options.responsive){
           width: "100%",
           height: Math.round((width/16)*9)+"px"
         });
-             
-      }); 
+
+      });
     }
     responsive_lp();
 
@@ -528,7 +563,7 @@ if(options.responsive){
         responsive_lp();
       }
     });
-  
+
 }else{
   null;
 }
@@ -571,7 +606,7 @@ if(options.responsive){
             if(options.paginationCounter){
               counter();
             }
-          
+
             return false;
           },
           mouseenter: function(){
@@ -599,7 +634,7 @@ if(options.responsive){
         ======================================================*/
         function animaFade(){
           var $self = $this.parent().find(".pagHighlight .active");
-          
+
           if($self.next().length == "0"){
             $this.parent().find(".pagHighlight a:last").removeClass("active");
             $this.parent().find(".pagHighlight a:first").addClass("active");
@@ -901,7 +936,7 @@ if(options.responsive){
       $liCont.css({
         width: "100%",
         height: "100%"
-      }); 
+      });
 
       function liSizeWidth(){
         $liW = $this.parent().width();
@@ -1015,7 +1050,7 @@ if(options.responsive){
           });
         }
       }
-      
+
       break;
 
       case 'concertina':
@@ -1038,7 +1073,7 @@ if(options.responsive){
         height: "102%"
       });
 
-    
+
       $liW = Math.round(((100 / $li.length)));
 
       console.log($liW)
@@ -1049,7 +1084,7 @@ if(options.responsive){
         "margin-right": options.concertinaAdjustmentFloat+"px"
       });
 
-     
+
       // z-index $li
       var contZ = 0;
       $li.each(function(){
@@ -1059,7 +1094,7 @@ if(options.responsive){
 
         contZ += 1;
         $self.css({
-          "z-index": contZ 
+          "z-index": contZ
         });
 
         // title box
@@ -1067,7 +1102,7 @@ if(options.responsive){
 
       });
 
-      
+
 
       $listCont.find("li:first").addClass("active");
 
@@ -1091,15 +1126,15 @@ if(options.responsive){
           },options.timeDelayIn,function(){
             $this.find('.title_lp').stop(false,false).fadeOut(options.timeDelayOut);
           });
-          
+
           $this.find(".listCont .expanded").stop(false,false).animate({
             width: Math.round(options.concertinaMaxWidth) + "%"
           },options.timeDelayIn,function(){
             $this.find('.title_lp').stop(false,false).fadeIn(options.timeDelayIn);
           });
-          
+
           $this.find(".titleBox_lp").stop(false,false).fadeOut(options.timeDelayOut);
-          
+
           return false;
         },
         mouseleave: function(){
@@ -1123,11 +1158,176 @@ if(options.responsive){
           console.log($liW)
 
           $this.find(".titleBox_lp").stop(false,false).fadeIn(options.timeDelayIn);
-         
+
 
         }
       });
-      
+
+      break;
+
+      case 'glass':
+      /*=====================================================
+        Glass
+      ======================================================*/
+      //vars
+      var $listCont = $this.find(".listCont");
+      var $li = $listCont.find("li");
+      var $liCont = $li.find(".cont");
+      var $linkPag = $this.parent().find(".pagHighlight a");
+      var $liW = 0;
+
+      $this.css({
+        overflow: 'visible'
+      });
+      $this.parent().css({
+        overflow: 'visible'
+      });
+
+      $liCont.css({
+        width: "100%",
+        height: "100%"
+      });
+
+      function liSizeWidth(){
+        $liW = $this.parent().width();
+        $li.css({
+          float: "left",
+          position: "relative",
+          width: $liW + "px"
+        });
+      }
+      liSizeWidth();
+
+      $(window).bind({
+        load: function(){
+          liSizeWidth();
+        },
+        resize: function(){
+          liSizeWidth();
+        }
+      });
+
+      //width $listCont
+      var $liLenghtWidth = $listCont.find("li").outerWidth();
+      var $widthUl = $liLenghtWidth * $li.length;
+
+      // position li active
+      $listCont.find("li").eq(options.glassPositionStart).addClass("active");
+      $linkPag.removeClass("active");
+      $linkPag.eq(options.glassPositionStart).addClass("active");
+
+
+      $listCont.css({
+        width: $widthUl + "px",
+        position: "relative",
+        left: "-"+ $listCont.find("li.active").width() +"px"
+      });
+
+      // elements for loop
+      var $liFirstClone = $listCont.find("li:first").clone(),
+          $liLastClone = $listCont.find("li:last").clone(),
+          $liClone = $listCont.find("li").clone();
+
+      $listCont.css({
+        width: $listCont.find("li").outerWidth() * $listCont.find("li").length + "px"
+      });
+
+      // $listCont.prepend($liClone);
+      // $listCont.find("li").last().after($liFirstClone);
+
+      $linkPag.bind({
+        click: function(){
+          var $self = $(this);
+          var $selfPosition = $self.data("position");
+
+          $linkPag.removeClass("active")
+          $self.addClass("active");
+
+          $li.removeClass("active");
+          $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active");
+
+          var $positionActive = $listCont.find("li.active").position();
+
+          if(options.paginationCounter){
+            counter();
+          }
+
+
+          return false;
+        },
+        mouseenter: function(){
+          var linkThis = $(this),
+              contThisLink = linkThis.html(),
+              linkPosition= linkThis.position();
+
+          $this.parent().find(".thumbHoverCont img").attr({
+            src: linkThis.data("urlimg")
+          });
+
+          $this.parent().find(".thumbHoverCont").css({
+            left: (linkPosition.left) - ($this.parent().find(".thumbHoverCont").width() / 2) + 8  +"px",
+          }).stop(false,true).fadeIn(300);
+
+        },
+        mouseleave: function(){
+
+          $this.parent().find(".thumbHoverCont").stop(false,true).fadeOut(300);
+
+        }
+      });
+      /*=====================================================
+        auto
+      ======================================================*/
+      function animaGlass(){
+        var $self = $this.parent().find(".pagHighlight .active");
+        var $listCont = $this.find('.listCont');
+
+        if($self.next().length == "0"){
+          $this.parent().find(".pagHighlight a:last").removeClass("active");
+          $this.parent().find(".pagHighlight a:first").addClass("active");
+        }
+
+        $self.next().addClass("active").prev().removeClass("active");
+
+        var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
+        var $positionActive = $listCont.find("li[data-position="+ $selfPosition +"]").position();
+
+        $listCont.find("li").removeClass("active");
+        $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active");
+
+        var firstLi = $listCont.find('li').eq(0).clone();
+
+        $listCont.stop(true,true).animate({
+          'margin-left': "-=" + Math.round($listCont.find('li').outerWidth()) +"px"
+        },options.timeSlide, function(){
+          $listCont.find('li').eq(0).remove();
+          $listCont.stop(true,true).animate({
+            'margin-left': "+=" + Math.round($listCont.find('li').outerWidth()) +"px"
+          },0);
+          $listCont.append(firstLi);
+        });
+
+        if(options.paginationCounter){
+          counter();
+        }
+
+        return false;
+      }
+      //auto
+      if(options.auto){
+        if($this.parent().find(".pagHighlight a").length <= 1){
+          null
+        }else{
+          //hover
+          time = setInterval(animaGlass, options.timeBanner);
+
+          $this.parent().find(".pagHighlight a").click(function(){
+            time = clearInterval(time);
+            time = setInterval(animaGlass, options.timeBanner);
+          });
+        }
+      }
+
       break;
 
     }
@@ -1136,6 +1336,6 @@ if(options.responsive){
 /*=====================================================
   verifications
 ======================================================*/
-  
+
 }
 })(jQuery);
