@@ -10,14 +10,16 @@ $.fn.slideLp = function(options){
   options
 ======================================================*/
   var defaults = {
-    effects: "fade", //"pageHoriz", "slide", "fade", "pageVert", "concertina", "glass"
-    auto: false,
-    timeBanner: 2000,
+    effects: "slide", //"pageHoriz", "slide", "fade", "pageVert", "concertina", "glass"
+    auto: true,
+    timeBanner: 5000,
     timeDelay: 500,
     timeSlide: 800,
     timeDelayIn: 500,
     timeDelayOut: 700,
     barCounter: false,
+    timerClock: true,
+    timerClockSize: 40,
     pagination: true,
     paginationThumb: false,
     thumbSizeWidth: 150,
@@ -28,7 +30,7 @@ $.fn.slideLp = function(options){
     navButtons: true,
     prevName: "<",
     nextName: ">",
-    keyboard: false,
+    keyboard: true,
     touch: false,
     thresholdX: 100,
     thresholdY: 100,
@@ -36,18 +38,32 @@ $.fn.slideLp = function(options){
     fullScreen: false,
     adjustmentSize: 0,
     responsive: true,
-    adjustmentResponsiveHeight: 2,
+    adjustmentResponsiveHeight: 1,
     concertinaMaxWidth: 64,
     concertinaAdjustmentFloat: "-0.5",
-    glassPositionStart: 1
-
+    glassPositionStart: 1,
+    glassVisible: false,
+    heigthAuto: true,
+    heigthAutoSpeed: 300
   }
   options = $.extend(defaults, options);
 /*=====================================================
   Geral
 ======================================================*/
-  var $heightThis = $this.height();
-  var $widthThis = $this.width();
+  function widthPage(){
+    $heightThis = $this.outerHeight();
+    $widthThis = $this.outerWidth();
+  }
+   widthPage();
+
+  $(window).bind({
+    load: function() {
+      widthPage();
+    },
+    resize: function() {
+      widthPage();
+    }
+  });
 
   // $(".wrapHighlight").css({
   //  width: ""+ $widthThis +"px",
@@ -56,24 +72,34 @@ $.fn.slideLp = function(options){
 
   //ie
   if (document.all && (!document.documentMode || (document.documentMode && document.documentMode == 8))) {
-      options.touch = false;
-      alert(options.touch)
+    options.touch = false;
+    //alert(options.touch)
   }else if(document.all && (!document.documentMode || (document.documentMode && document.documentMode == 7))){
     options.touch = false;
-    alert(options.touch)
+    //alert(options.touch)
   }else if(document.all && (!document.documentMode || (document.documentMode && document.documentMode == 6))){
     options.touch = false;
-    alert(options.touch)
+    //alert(options.touch)
   }
 
-  //listCont data-position
+  // call all functions back
+  function callBacks(){
+    if(options.paginationCounter){
+      counter();
+    }
+    if(options.timerClock){
+      startClock();
+    }
+  }
+
+  //listCont data-positionlp
   var $contDataPosition = -1;
   $this.find(".listCont li").each(function(){
     var $self = $(this);
 
     $contDataPosition += 1;
 
-    $self.attr("data-position",$contDataPosition);
+    $self.attr("data-positionlp",$contDataPosition);
   });
 
   //$this styles
@@ -98,7 +124,7 @@ if(options.pagination){
       $.each($this.find(".listCont li"),function(index){
         var $selfImgSrc = $(this).find(".cont img").attr("src");
 
-        $pages += '<a href="javascript:void(0)" data-position='+ index +' data-urlImg='+$selfImgSrc+'></a>\n';
+        $pages += '<a href="javascript:void(0)" data-positionlp='+ index +' data-urlImg='+$selfImgSrc+'></a>\n';
         });
       // '+ $(this).find(".cont").html() +'
       $pages += "</nav>";
@@ -116,7 +142,7 @@ if(options.pagination){
   if(options.paginationThumb){
 
     $.each($this.find(".listCont li"),function(index){
-    $pages += '<a href="javascript:void(0)" data-position='+ index +'><img src='+$(this).find(".cont img").attr("src")+' /></a>\n';
+    $pages += '<a href="javascript:void(0)" data-positionlp='+ index +'><img src='+$(this).find(".cont img").attr("src")+' /></a>\n';
     });
     $pages += "</nav>";
     //add before section wrapHighlight
@@ -151,11 +177,11 @@ if(options.pagination){
   else{
     if(options.paginationHover){
       $.each($this.find(".listCont li"),function(index){
-        //$pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
+        //$pages += '<a href="javascript:void(0)" data-positionlp='+ index +'>'+ ++index +'</a>\n';
       });
     }else{
       $.each($this.find(".listCont li"),function(index){
-        $pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
+        $pages += '<a href="javascript:void(0)" data-positionlp='+ index +'>'+ ++index +'</a>\n';
       });
     }
     $pages += "</nav>";
@@ -168,7 +194,7 @@ if(options.pagination){
   var $contBanner = $this.find(".listCont li .cont").html();
 
   $.each($this.find(".listCont li"),function(index){
-    $pages += '<a href="javascript:void(0)" data-position='+ index +'>'+ ++index +'</a>\n';
+    $pages += '<a href="javascript:void(0)" data-positionlp='+ index +'>'+ ++index +'</a>\n';
   });
   $pages += "</nav>";
   //add before section wrapHighlight
@@ -221,6 +247,68 @@ if(options.barCounter && options.auto){
     display: "none"
   });
 }
+
+/*=====================================================
+  timerClock
+======================================================*/
+if(options.timerClock){
+  if(options.auto){
+    var $pieClock = "<div class='pieLp'><div class=timer fill'></div></div>";
+
+      $this.parent().append($pieClock);
+
+        $this.parent().find('.pieLp').css({
+          width: options.timerClockSize+"px",
+          height: options.timerClockSize+"px"
+        });
+        $this.parent().find('.timer').css({
+          "font-size": options.timerClockSize+"px"
+        });
+
+        $this.parent().find('.timer #slice .pie').css({
+          "border-color": options.timerClockColorBorder
+        });
+
+        var timer;
+        var timerCurrent;
+        var timerFinish;
+        var timerSeconds;
+        function drawTimer(percent){
+          $this.parent().find('.timer').html('<div class="percent"></div><div id="slice"'+(percent > 50?' class="gt50"':'')+'><div class="pie"></div>'+(percent > 50?'<div class="pie fill"></div>':'')+'</div>');
+          var deg = 360/100*percent;
+          $this.parent().find('#slice .pie').css({
+            '-moz-transform':'rotate('+deg+'deg)',
+            '-webkit-transform':'rotate('+deg+'deg)',
+            '-o-transform':'rotate('+deg+'deg)',
+            'transform':'rotate('+deg+'deg)'
+          });
+          $this.parent().find('.percent').html(Math.round(percent)+'%');
+        }
+        function stopWatch(){
+          var seconds = (timerFinish-(new Date().getTime()))/1000;
+          if(seconds <= 0){
+            drawTimer(100);
+            clearInterval(timer);
+            //start
+            startClock();
+          }else{
+            var percent = 100-((seconds/timerSeconds)*100);
+            drawTimer(percent);
+          }
+        }
+        //start
+        function startClock(){
+            timerSeconds = options.timeBanner / 1000;
+            timerCurrent = 0;
+            timerFinish = new Date().getTime()+(timerSeconds*1000);
+            timer = setInterval(stopWatch,50);
+        }
+        startClock();
+  }
+
+}else{
+  null;
+}
 /*=====================================================
   navButtons
 ======================================================*/
@@ -236,21 +324,11 @@ if(options.navButtons){
     click: function(){
       var $self = $this.parent().find(".pagHighlight .active");
 
-      if($self.next().length == "0"){
-        $this.parent().find(".pagHighlight a:last").removeClass("active");
-        $this.parent().find(".pagHighlight a:first").addClass("active").click();
-      }
-
-      $self.next().addClass("active").click().prev().removeClass("active");
-
-      if(options.paginationCounter){
-        counter();
-      }
-
       if(options.effects === "glass"){
         var $listCont = $this.find('.listCont');
-        var firstLi = $listCont.find('li').eq(0).clone();
+        var $firstLi = $listCont.find('li').eq(0).clone();
 
+        $listCont.append($firstLi);
         $listCont.stop(true,true).animate({
           'margin-left': "-=" + Math.round($listCont.find('li').outerWidth()) +"px"
         },options.timeSlide, function(){
@@ -258,9 +336,19 @@ if(options.navButtons){
           $listCont.stop(true,true).animate({
             'margin-left': "+=" + Math.round($listCont.find('li').outerWidth()) +"px"
           },0);
-          $listCont.append(firstLi);
         });
       }
+
+      if($self.next().length == "0"){
+        $this.parent().find(".pagHighlight a:last").removeClass("active");
+        $this.parent().find(".pagHighlight a:first").addClass("active").click();
+      }
+
+
+      $self.next().addClass("active").click().prev().removeClass("active");
+
+      // callBacks
+      callBacks();
 
       return false;
     }
@@ -270,17 +358,6 @@ if(options.navButtons){
   $this.parent().find(".prevButton").bind({
     click: function(){
       var $self = $this.parent().find(".pagHighlight .active");
-
-      if($self.prev().length == "0"){
-        $this.parent().find(".pagHighlight a:first").removeClass("active");
-        $this.parent().find(".pagHighlight a:last").addClass("active").click();
-      }
-
-      $self.prev().addClass("active").click().next().removeClass("active");
-
-      if(options.paginationCounter){
-        counter();
-      }
 
       if(options.effects === "glass"){
         var $listCont = $this.find('.listCont');
@@ -296,6 +373,18 @@ if(options.navButtons){
           $listCont.prepend(lastLi);
         });
       }
+
+      if($self.prev().length == "0"){
+        $this.parent().find(".pagHighlight a:first").removeClass("active");
+        $this.parent().find(".pagHighlight a:last").addClass("active").click();
+      }
+
+
+      $self.prev().addClass("active").click().next().removeClass("active");
+
+      // callBacks
+      callBacks();
+
 
       return false;
     }
@@ -593,19 +682,18 @@ if(options.fullScreen){
         $linkPag.bind({
           click: function(){
             var $self = $(this);
-            var $selfPosition = $self.data("position");
+            var $selfPosition = $self.data("positionlp");
 
             $linkPag.removeClass("active")
             $self.addClass("active");
 
             $li.stop(false,true).fadeOut(options.timeDelayOut).removeClass("active");
 
-            $listCont.find("li[data-position="+ $selfPosition +"] .cont").css("width","100%");
-            $listCont.find("li[data-position="+ $selfPosition +"]").stop(false,true).fadeIn(options.timeDelayIn).addClass("active");
+            $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").css("width","100%");
+            $listCont.find("li[data-positionlp="+ $selfPosition +"]").stop(false,true).fadeIn(options.timeDelayIn).addClass("active");
 
-            if(options.paginationCounter){
-              counter();
-            }
+            // callBacks
+            callBacks();
 
             return false;
           },
@@ -642,20 +730,18 @@ if(options.fullScreen){
 
           $self.next().addClass("active").prev().removeClass("active");
 
-          var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
+          var $selfPosition = $this.parent().find(".pagHighlight .active").data("positionlp");
 
           $li.stop(false,true).fadeOut(options.timeDelayOut).removeClass("active");
 
-          $listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
+          $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").css({
             width: "100%",
             display: "block"
           });
-          $listCont.find("li[data-position="+ $selfPosition +"]").stop(false,true).fadeIn(options.timeDelayIn).addClass("active");
+          $listCont.find("li[data-positionlp="+ $selfPosition +"]").stop(false,true).fadeIn(options.timeDelayIn).addClass("active");
 
-          if(options.paginationCounter){
-            counter();
-          }
-
+          // callBacks
+          callBacks();
           return false;
         }
         //auto
@@ -692,22 +778,39 @@ if(options.fullScreen){
           $(this).css("z-index", --j)
         });
 
+        var $thisWidth
+
+        if(options.responsive){
+          $(window).bind({
+            load: function() {
+              $li.find("img").css({
+                width: $widthThis + "px"
+              });
+            },
+            resize: function() {
+              $li.find("img").css({
+                width: $widthThis + "px"
+              });
+            }
+          });
+        }
+
         $linkPag.bind({
           click: function(){
             var $self = $(this);
-            var $selfPosition = $self.data("position");
+            var $selfPosition = $self.data("positionlp");
 
             $linkPag.removeClass("active")
             $self.addClass("active");
 
-            $listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
+            $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").css({
               width: "0%"
             });
 
             $li.removeClass("active");
 
-            $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
-            $listCont.find("li[data-position="+ $selfPosition +"] .cont").stop(true,true).animate({
+            $listCont.find("li[data-positionlp="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
+            $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").stop(true,true).animate({
               width: "100%"
             },options.timeDelay);
 
@@ -715,6 +818,9 @@ if(options.fullScreen){
               counter();
             }
 
+          if(options.timerClock){
+            startClock();
+          }
             return false;
           },
           mouseenter: function(){
@@ -750,23 +856,21 @@ if(options.fullScreen){
 
           $self.next().addClass("active").prev().removeClass("active");
 
-          var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
+          var $selfPosition = $this.parent().find(".pagHighlight .active").data("positionlp");
 
-          $listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
+          $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").css({
             width: "0%"
           });
 
           $li.removeClass("active");
 
-          $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
-          $listCont.find("li[data-position="+ $selfPosition +"] .cont").stop(true,true).animate({
+          $listCont.find("li[data-positionlp="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
+          $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").stop(true,true).animate({
             width: "100%"
           },options.timeDelay);
 
-          if(options.paginationCounter){
-            counter();
-          }
-
+          // callBacks
+          callBacks();
           return false;
         }
         //auto
@@ -824,26 +928,24 @@ if(options.fullScreen){
       $linkPag.bind({
         click: function(){
           var $self = $(this);
-          var $selfPosition = $self.data("position");
+          var $selfPosition = $self.data("positionlp");
 
           $linkPag.removeClass("active")
           $self.addClass("active");
 
-          $listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
+          $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").css({
             height: "0%"
           });
 
           $li.removeClass("active");
 
-          $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
-          $listCont.find("li[data-position="+ $selfPosition +"] .cont").stop(true,true).animate({
+          $listCont.find("li[data-positionlp="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
+          $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").stop(true,true).animate({
             height: "100%"
           },options.timeDelay);
 
-          if(options.paginationCounter){
-            counter();
-          }
-
+          // callBacks
+          callBacks();
           return false;
         },
         mouseenter: function(){
@@ -879,22 +981,21 @@ if(options.fullScreen){
 
         $self.next().addClass("active").prev().removeClass("active");
 
-        var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
+        var $selfPosition = $this.parent().find(".pagHighlight .active").data("positionlp");
 
-        $listCont.find("li[data-position="+ $selfPosition +"] .cont").css({
+        $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").css({
           height: "0%"
         });
 
         $li.removeClass("active");
 
-        $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
-        $listCont.find("li[data-position="+ $selfPosition +"] .cont").stop(true,true).animate({
+        $listCont.find("li[data-positionlp="+ $selfPosition +"]").addClass("active").css("z-index", ++i);
+        $listCont.find("li[data-positionlp="+ $selfPosition +"] .cont").stop(true,true).animate({
           height: "100%"
         },options.timeDelay);
 
-        if(options.paginationCounter){
-          counter();
-        }
+        // callBacks
+        callBacks();
 
         return false;
       }
@@ -933,11 +1034,25 @@ if(options.fullScreen){
 
       function liSizeWidth(){
         $liW = $this.parent().width();
+
         $li.css({
           float: "left",
           position: "relative",
           width: $liW + "px"
         });
+
+        //heigthAuto
+        if(options.heigthAuto){
+          $li.each(function(){
+            $imgH = $(this).find("img").height();
+            $(this).attr({
+              "data-heightimg": $imgH
+            });
+          });
+          $this.parent().css({
+            "height": $listCont.find("li:first").data("heightimg") + "px"
+          });
+        }
       }
       liSizeWidth();
 
@@ -963,13 +1078,13 @@ if(options.fullScreen){
       $linkPag.bind({
         click: function(){
           var $self = $(this);
-          var $selfPosition = $self.data("position");
+          var $selfPosition = $self.data("positionlp");
 
           $linkPag.removeClass("active")
           $self.addClass("active");
 
           $li.removeClass("active");
-          $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active");
+          $listCont.find("li[data-positionlp="+ $selfPosition +"]").addClass("active");
 
           var $positionActive = $listCont.find("li.active").position();
 
@@ -977,10 +1092,15 @@ if(options.fullScreen){
             left: "-="+ $positionActive.left +"px"
           },options.timeSlide);
 
-          if(options.paginationCounter){
-            counter();
+          //heigthAuto
+          if(options.heigthAuto){
+            $this.parent().animate({
+              "height": $listCont.find("li.active").data("heightimg") + "px"
+            },options.heigthAutoSpeed);
           }
 
+          // callBacks
+          callBacks();
           return false;
         },
         mouseenter: function(){
@@ -1016,16 +1136,23 @@ if(options.fullScreen){
 
         $self.next().addClass("active").prev().removeClass("active");
 
-        var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
-        var $positionActive = $listCont.find("li[data-position="+ $selfPosition +"]").position();
+        var $selfPosition = $this.parent().find(".pagHighlight .active").data("positionlp");
+        var $positionActive = $listCont.find("li[data-positionlp="+ $selfPosition +"]").position();
 
         $listCont.find("li").stop(true,true).animate({
           left: "-="+ $positionActive.left +"px"
         },options.timeSlide);
 
-        if(options.paginationCounter){
-          counter();
+        //heigthAuto
+        if(options.heigthAuto){
+          var $positionSelf = $self.data("positionlp") + 1;
+          $this.parent().animate({
+            "height": $listCont.find("li").eq($positionSelf).data("heightimg") + "px"
+          },options.heigthAutoSpeed);
         }
+
+        // callBacks
+        callBacks();
 
         return false;
       }
@@ -1107,7 +1234,7 @@ if(options.fullScreen){
       $li.bind({
         mouseenter: function(){
           var $linkThis = $(this);
-          var $selfPosition = $linkThis.data("position");
+          var $selfPosition = $linkThis.data("positionlp");
 
           $li.removeClass('expanded').addClass('compress');
           $linkThis.removeClass('compress').addClass('expanded');
@@ -1172,9 +1299,16 @@ if(options.fullScreen){
       $this.css({
         overflow: 'visible'
       });
-      $this.parent().css({
-        overflow: 'visible'
-      });
+
+      if(options.glassVisible){
+        $this.parent().css({
+          overflow: 'visible'
+        });
+      }else{
+        $this.parent().css({
+          overflow: 'hidden'
+        });
+      }
 
       $liCont.css({
         width: "100%",
@@ -1209,11 +1343,21 @@ if(options.fullScreen){
       $linkPag.removeClass("active");
       $linkPag.eq(options.glassPositionStart).addClass("active");
 
-
-      $listCont.css({
-        width: $widthUl + "px",
-        position: "relative",
-        left: "-"+ $listCont.find("li.active").width() +"px"
+      $(window).bind({
+        load: function(){
+          $listCont.css({
+            width: $widthUl + "px",
+            position: "relative",
+            "margin-left": "-"+ ($listCont.find("li.active").width() * options.glassPositionStart) +"px"
+          });
+        },
+        resize: function(){
+          $listCont.css({
+            width: $widthUl + "px",
+            position: "relative",
+            "margin-left": "-"+ ($listCont.find("li.active").width() * options.glassPositionStart) +"px"
+          });
+        }
       });
 
       // elements for loop
@@ -1231,20 +1375,18 @@ if(options.fullScreen){
       $linkPag.bind({
         click: function(){
           var $self = $(this);
-          var $selfPosition = $self.data("position");
+          var $selfPosition = $self.data("positionlp");
 
           $linkPag.removeClass("active")
           $self.addClass("active");
 
           $li.removeClass("active");
-          $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active");
+          $listCont.find("li[data-positionlp="+ $selfPosition +"]").addClass("active");
 
           var $positionActive = $listCont.find("li.active").position();
 
-          if(options.paginationCounter){
-            counter();
-          }
-
+          // callBacks
+          callBacks();
 
           return false;
         },
@@ -1282,14 +1424,15 @@ if(options.fullScreen){
 
         $self.next().addClass("active").prev().removeClass("active");
 
-        var $selfPosition = $this.parent().find(".pagHighlight .active").data("position");
-        var $positionActive = $listCont.find("li[data-position="+ $selfPosition +"]").position();
+        var $selfPosition = $this.parent().find(".pagHighlight .active").data("positionlp");
+        var $positionActive = $listCont.find("li[data-positionlp="+ $selfPosition +"]").position();
 
         $listCont.find("li").removeClass("active");
-        $listCont.find("li[data-position="+ $selfPosition +"]").addClass("active");
+        $listCont.find("li[data-positionlp="+ $selfPosition +"]").addClass("active");
 
-        var firstLi = $listCont.find('li').eq(0).clone();
+        var $firstLi = $listCont.find('li').eq(0).clone();
 
+        $listCont.append($firstLi);
         $listCont.stop(true,true).animate({
           'margin-left': "-=" + Math.round($listCont.find('li').outerWidth()) +"px"
         },options.timeSlide, function(){
@@ -1297,12 +1440,10 @@ if(options.fullScreen){
           $listCont.stop(true,true).animate({
             'margin-left': "+=" + Math.round($listCont.find('li').outerWidth()) +"px"
           },0);
-          $listCont.append(firstLi);
         });
 
-        if(options.paginationCounter){
-          counter();
-        }
+        // callBacks
+        callBacks();
 
         return false;
       }
