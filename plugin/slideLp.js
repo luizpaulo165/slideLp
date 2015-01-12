@@ -329,11 +329,11 @@ if(options.navButtons){
         var $firstLi = $listCont.find('li').eq(0).clone();
 
         $listCont.append($firstLi);
-        $listCont.stop(true,true).animate({
+        $listCont.stop(true,true).stop(false,true).animate({
           'margin-left': "-=" + Math.round($listCont.find('li').outerWidth()) +"px"
         },options.timeSlide, function(){
           $listCont.find('li').eq(0).remove();
-          $listCont.stop(true,true).animate({
+          $listCont.stop(true,true).stop(false,true).animate({
             'margin-left': "+=" + Math.round($listCont.find('li').outerWidth()) +"px"
           },0);
         });
@@ -363,11 +363,11 @@ if(options.navButtons){
         var $listCont = $this.find('.listCont');
         var lastLi = $listCont.find('li:last').clone();
 
-        $listCont.stop(true,true).animate({
+        $listCont.stop(true,true).stop(false,true).animate({
           'margin-left': "+=" + Math.round($listCont.find('li').outerWidth()) +"px"
         },options.timeSlide, function(){
           $listCont.find('li:last').remove();
-          $listCont.stop(true,true).animate({
+          $listCont.stop(true,true).stop(false,true).animate({
             'margin-left': "-=" + Math.round($listCont.find('li').outerWidth()) +"px"
           },0);
           $listCont.prepend(lastLi);
@@ -1128,12 +1128,13 @@ if(options.fullScreen){
       ======================================================*/
       function animaSlide(){
         var $self = $this.parent().find(".pagHighlight .active");
+        var $positionSelf = $self.data("positionlp") + 1;
 
         if($self.next().length == "0"){
+          $positionSelf = 0;
           $this.parent().find(".pagHighlight a:last").removeClass("active");
           $this.parent().find(".pagHighlight a:first").addClass("active");
         }
-
         $self.next().addClass("active").prev().removeClass("active");
 
         var $selfPosition = $this.parent().find(".pagHighlight .active").data("positionlp");
@@ -1145,7 +1146,6 @@ if(options.fullScreen){
 
         //heigthAuto
         if(options.heigthAuto){
-          var $positionSelf = $self.data("positionlp") + 1;
           $this.parent().animate({
             "height": $listCont.find("li").eq($positionSelf).data("heightimg") + "px"
           },options.heigthAutoSpeed);

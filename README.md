@@ -1,4 +1,4 @@
-SlideLp v2.0 - Responsivo + Touch + Full Screen
+SlideLp v2.2 - Responsivo + Touch + Full Screen
 ===============================
 
 Este plugin está sendo desenvolvido para facilitar a vida de muitas pessoas que pretendem desenvolver um site e precisam de um banner de destaque.
@@ -39,33 +39,9 @@ Html base do plugin:
           <ul class="listCont">
             <li>
               <div class="cont">
-                <a href="http://bakea.tumblr.com/image/31509459244" target="_blank">
-                  <img src="imgs/img4.jpg" alt="Imagem 1"/>
+                <a href="#" target="_blank">
+                  <img src="imgs.jpg" alt="Imagem 1"/>
                   <div class="title_lp">Título da Imagem 1</div>
-                </a>
-              </div>
-            </li><!-- block -->
-            <li>
-              <div class="cont">
-                <a href="http://bakea.tumblr.com/image/69089253161" target="_blank">
-                  <img src="imgs/img2.jpg" alt="Imagem 2"/>
-                  <div class="title_lp">Título da Imagem 2</div>
-                </a>
-              </div>
-            </li><!-- block -->
-            <li>
-              <div class="cont">
-                <a href="http://bakea.tumblr.com/image/63509446428" target="_blank">
-                  <img src="imgs/img3.jpg" alt="Imagem 3"/>
-                  <div class="title_lp">Título da Imagem 3</div>
-                </a>
-              </div>
-            </li><!-- block -->
-            <li>
-              <div class="cont">
-                <a href="http://bakea.tumblr.com/image/41854612172" target="_blank">
-                  <img src="imgs/img1.jpg" alt="Imagem 4"/>
-                  <div class="title_lp">Título da Imagem 4</div>
                 </a>
               </div>
             </li><!-- block -->
@@ -229,5 +205,15 @@ O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar alg
     <td>concertinaAdjustmentFloat</td>
     <td>string</td>
     <td>Trabalha em conjunto com a opção de efeito "concertina". Com ele fazemos o ajuste do float na imagem, subitraindo ou almentando a distancia do float das imagens. Valor padrão "-0.5".</td>
+  </tr>
+  <tr>  
+    <td>heigthAuto</td>
+    <td>boolean</td>
+    <td>Trabalha em conjunto com a opção de efeito "slide". Com ele fazemos o ajuste da altura do plugin. Valor padrão "true".</td>
+  </tr>
+  <tr>  
+    <td>heigthAutoSpeed</td>
+    <td>number</td>
+    <td>Trabalha em conjunto com a opção de efeito "heigthAuto". Com ele fazemos o ajuste da velocidade do efeito. Valor padrão "300".</td>
   </tr>
 </table>

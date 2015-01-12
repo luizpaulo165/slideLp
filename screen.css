@@ -6,7 +6,7 @@
 	Alterado Por:
 
 	Favor não quebrar o código, caso precise atualizar-lo, favor use a mesma semântica.
-   Please not break this code, you need to change it, please use the same semantics.
+   Please not break this code, you need to change it, please use the same semantics. 
 ------------------------------------ */
 /* =============================================================================
    Reset
@@ -14,7 +14,7 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small,strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,  caption, figure{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;vertical-align:baseline;text-decoration:none!important;outline: 0!important;}
 strong{font-weight:bold;}
 :focus{outline:0}
-body{font-family:Arial,Verdana,Tahoma,Helvetica, sans-serif;font-size:10px;background:url(imgs/congruent_pentagon.png) repeat top left;overflow-x:hidden!important;}
+body{font-family:Arial,Verdana,Tahoma,Helvetica, sans-serif;font-size:10px;background:url(imgs/bg.png) repeat top left;}
 ol, ul{list-style:none}
 table{border-collapse: separate;border-spacing:0}
 caption, th, td{text-align: left;font-weight: normal}
@@ -23,23 +23,59 @@ blockquote, q{ quotes: "" ""}
 /* =============================================================================
    Base
    ========================================================================== */
-::-moz-selection {background:#FF4E50;color:#fff;text-shadow:none}
-::-webkit-selection {background:#FF4E50;color:#fff;text-shadow:none}
-::-o-selection {background:#FF4E50;color:#fff;text-shadow:none}
-::-ms-selection {background:#FF4E50;color:#fff;text-shadow:none}
-::selection {background:#FF4E50;color:#fff;text-shadow:none}
+::-moz-selection {background:#20202F;color:#fff;text-shadow:none}
+::-webkit-selection {background:#20202F;color:#fff;text-shadow:none}
+::-o-selection {background:#20202F;color:#fff;text-shadow:none}
+::-ms-selection {background:#20202F;color:#fff;text-shadow:none}
+::selection {background:#20202F;color:#fff;text-shadow:none}
 /* =============================================================================
    Geral
    ========================================================================== */
-   #container{width:980px;display:block;margin:0 auto;padding:0 10px;}
+   .center{width:960px;margin:0 auto;position:relative;}
+   #container{width:75%;display:block;margin:0 auto;padding:10px;overflow:hidden;}
 
-   #logo{font-family: 'Nova Square', cursive;display:block;margin-bottom:30px;padding:12px;position:relative;clear:both;overflow:hidden;}
+   #logo{font-family: 'Nova Square', cursive;display:block;margin-bottom:30px;padding:12px;clear:both;overflow:hidden;}
       #logo figure{position:relative;}
       #logo img{position:relative;top:15px;z-index:1;}
-      #logo figcaption{text-align:center;font-size:100px;color:#0B486B;width:100%;position:absolute;top:0;z-index:0;text-shadow:0px 1px 0px #fff;-moz-text-shadow:0px 1px 0px #fff;-webkit-text-shadow:0px 1px 0px #fff;-o-text-shadow:0px 1px 0px #fff;-ms-text-shadow:0px 1px 0px #fff;}
+      #logo figcaption{text-align:center;font-size:100px;color:#BD93F9;width:100%;position:absolute;top:0;letter-spacing:-10px;z-index:0;text-shadow:2px 3px 0px #F1DA63;-moz-text-shadow:2px 3px 0px #F1DA63;-webkit-text-shadow:2px 3px 0px #F1DA63;-o-text-shadow:2px 3px 0px #F1DA63;-ms-text-shadow:2px 3px 0px #F1DA63;}
 
+      
+   #highlight{background:#000;width:960px;height:600px;border:1px solid #222;margin:0 auto;padding:0px!important;overflow:hidden;box-shadow:0px 0px 8px #333;-moz-box-shadow:0px 0px 8px #333;-webkit-box-shadow:0px 0px 8px #333;-o-box-shadow:0px 0px 8px #333;-ms-box-shadow:0px 0px 8px #333;}
 
-   #highlight{background:#EBFDD4;width:980px;height:600px;margin:0 auto;padding:0px!important;position:relative;overflow:hidden;box-shadow:0px 0px 8px #3B8686;-moz-box-shadow:0px 0px 8px #3B8686;-webkit-box-shadow:0px 0px 8px #3B8686;-o-box-shadow:0px 0px 8px #3B8686;-ms-box-shadow:0px 0px 8px #3B8686;}
-   #author_photo{font-family: 'Nova Square', cursive;font-size:18px;color:#3B8686;width:960px;margin:0 auto;padding:20px 0;}
-      #author_photo a{font-size:25px;color:#0B486B;width:960px;margin:0 auto;padding-top:50px;}
-      #author_photo a:hover{text-shadow:0px 1px 0px #fff;-moz-text-shadow:0px 1px 0px #fff;-webkit-text-shadow:0px 1px 0px #fff;-o-text-shadow:0px 1px 0px #fff;-ms-text-shadow:0px 1px 0px #fff;}
+   #author_photo{font-family: 'Nova Square', cursive;font-size:18px;color:#F1DA63;width:75%;margin:0 auto;padding:20px 0;float:left;overflow:hidden;}
+      #author_photo a{font-size:25px;color:#F1DA63;width:960px;margin:0 auto;padding-top:50px;}
+      #author_photo a:hover{text-shadow:0px 1px 0px #BD93F9;-moz-text-shadow:0px 1px 0px #BD93F9;-webkit-text-shadow:0px 1px 0px #BD93F9;-o-text-shadow:0px 1px 0px #BD93F9;-ms-text-shadow:0px 1px 0px #BD93F9;}
+
+   #wrap_info{width:130px;position:fixed;top:25%;right:10px;}
+   #donate{background:#fff;width:130px;padding:10px 5px;position:relative;z-index:901;}
+   #donate h2{text-align:center;font-family: 'Nova Square', cursive;font-weigth:bold;font-size:14px;color:#08486B;margin-bottom:5px;}
+   #donate h2 span{color:#BD93F9;}
+   #donate input{display:block;margin:0 auto;}
+
+   #download{text-align:center;margin-bottom:60px;position:relative;z-index:900;}
+      #download a {
+         font-family: 'Nova Square', cursive;
+         background:#e7ce65 url(imgs/github.png) no-repeat 50% 88%;
+         width:140px;
+         display:inline-block;
+         font-size:15px;
+         text-decoration:none;
+         color:#fff;
+         position:relative;
+         padding-bottom:40px;
+         padding-top:10px;
+         -webkit-box-shadow: inset 0px 1px 0px #333, 0px 5px 0px 0px #333, 0px 10px 5px #333;
+         -moz-box-shadow: inset 0px 1px 0px #333, 0px 5px 0px 0px #333, 0px 10px 5px #333;
+         -o-box-shadow: inset 0px 1px 0px #333, 0px 5px 0px 0px #333, 0px 10px 5px #333;
+         box-shadow: inset 0px 1px 0px #333, 0px 5px 0px 0px #333, 0px 10px 5px #333;
+      }
+
+      #download a:active {
+         top:0px;
+         background:#BD93F9 url(imgs/github.png) no-repeat 50% 88%;
+         
+         -webkit-box-shadow: inset 0px 4px 1px #333, 0px 2px 0px 0px #156785, 0px 5px 3px #333;
+         -moz-box-shadow: 0px 2px 0px 1px #333, 0px 5px 3px #333;
+         -o-box-shadow: 0px 2px 0px 1px #333, 0px 5px 3px #333;
+         box-shadow: inset 0px 4px 1px #333, 0px 2px 0px 0px #333, 0px 5px 3px #333;
+      }
