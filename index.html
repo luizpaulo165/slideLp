@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Slidelp by luizpaulo165</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Slidelp</h1>
+        <h2>Highlight built with jquery.</h2>
+        <a href="https://github.com/luizpaulo165/slideLp" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="slidelp-v22---responsivo--touch--full-screen" class="anchor" href="#slidelp-v22---responsivo--touch--full-screen" aria-hidden="true"><span class="octicon octicon-link"></span></a>SlideLp v2.2 - Responsivo + Touch + Full Screen</h1>
+
+<p>Este plugin está sendo desenvolvido para facilitar a vida de muitas pessoas que pretendem desenvolver um site e precisam de um banner de destaque.</p>
+
+<p>Ainda estamos na versão 1.0, portanto existem algumas propriedades que ainda não foram desenvolvidas. Existem também alguns bugs a serem corrigidos, por favos, caso encontre algum, comentar o ocorrido para que possamos corrigi-los.</p>
+
+<h1>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
+
+<p>Veja ele em funcionamento clicando <a href="http://slidelp.mostone.com.br" target="blank">aqui</a></p>
+
+<h1>
+<a id="como-usar" class="anchor" href="#como-usar" aria-hidden="true"><span class="octicon octicon-link"></span></a>Como usar</h1>
+
+<p>Como usar o plugin:</p>
+
+<pre><code>1 - Você deve fazer o download do plugin;
+2 - Descompatar;
+3 - Dentro da pasta, acesse a pasta que possui o nome de "plugin", dentro dela estão dos os aquivos nessesários para o funcionamento do slideLp;
+4 - Por fim, basta apenas adicionar os arquivos no seu projeto e pronto!
+</code></pre>
+
+<h1>
+<a id="obs-importante" class="anchor" href="#obs-importante" aria-hidden="true"><span class="octicon octicon-link"></span></a>OBS Importante!</h1>
+
+<p>O slideLp foi feito usando tags HTML5, portanto alguns navegadores que não possuem essa tecnologia não conseguiram interpretar as tags, um exemplo pratico seria no IE7 ou IE8 onde os navegadores não possuem suporte a Html5, com isso o plugin não iria funcionar corretamente. Para resolver esse problemas usamos dois plugins js, são eles: </p>
+
+<pre><code> - Modernizr: Para mais informações acesse o site &lt;a href="http://www.modernizr.com/"&gt;http://www.modernizr.com/&lt;/a&gt;;
+ - html5.js;
+</code></pre>
+
+<p>Aplicando esses dois js fará com que os navegadores mais antigos consigam interpretar as novas tags do Html5. Os mesmo encontram-se na pasta "html5-js" dentro da pasta do projeto.</p>
+
+<h1>
+<a id="html-base-e-chamada-js" class="anchor" href="#html-base-e-chamada-js" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML base e Chamada js</h1>
+
+<p>Html base do plugin:</p>
+
+<pre><code>&lt;section id="highlight"&gt;
+   &lt;section class="wrapHighlight"&gt;
+      &lt;ul class="listCont"&gt;
+        &lt;li&gt;
+          &lt;div class="cont"&gt;
+            &lt;a href="#" target="_blank"&gt;
+              &lt;img src="imgs.jpg" alt="Imagem 1"/&gt;
+              &lt;div class="title_lp"&gt;Título da Imagem 1&lt;/div&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;&lt;!-- block --&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;&lt;!-- wrapHighlight --&gt;
+&lt;/section&gt;&lt;!-- highlight --&gt;
+</code></pre>
+
+<p>Chamada base do plugin:</p>
+
+<pre><code>$(function(){
+    $("#highlight").slideLp();
+});
+</code></pre>
+
+<p>Chamada usando as configurações do plugin:</p>
+
+<pre><code>$(function(){
+    $("#highlight").slideLp({
+        auto: true,
+        timeBanner: "5000",
+        effects: "page",
+        timeDelay: "200"
+    });
+});
+</code></pre>
+
+<h1>
+<a id="configurações" class="anchor" href="#configura%C3%A7%C3%B5es" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configurações</h1>
+
+<p>O slideLp foi desenvolvido com a capacidade de poder abilitar ou desabilitar algumas funcionalidades.</p>
+
+<table width="100%">
+    <tr>    
+        <td>Sintaxe</td>
+        <td>Tipo</td>
+        <td>Descrição</td>
+    </tr>
+    <tr>    
+        <td>effects</td>
+        <td>string</td>
+        <td>Existem dois tipos de efeito: "concertina", "slide", "fade", "pageVert", "pageHoriz"</td>
+    </tr>
+    <tr>    
+        <td>auto</td>
+        <td>boolean</td>
+        <td>Faz com que o plugin asione automaticamente as transições de uma imagem para a outra. Valor padrão "true".</td>
+    </tr>
+    <tr>    
+        <td>timeBanner</td>
+        <td>integer</td>
+        <td>Tempo que o banner leva para fazer a animação.</td>
+    </tr>
+    <tr>    
+        <td>timeDelay</td>
+        <td>integer</td>
+        <td>o timeDelay é usando apenas nos efeitos onde precisamos de um controle melhor da transição. Exemplo: No efeito "fade", ele é usado na transição de um elemento para o outro.</td>
+    </tr>
+    <tr>    
+        <td>timeSlide</td>
+        <td>integer</td>
+        <td>o timeSlide é usando para em conjunto com a transição "Slide", com isso deixando ainda mais flexível a transição.</td>
+    </tr>
+    <tr>    
+        <td>timeDelayIn / timeDelayOut</td>
+        <td>integer</td>
+        <td>Serve para custumizar o tempo de entrada e saída das transições dos efeitos.</td>
+    </tr>
+    <tr>    
+        <td>barCounter</td>
+        <td>boolean</td>
+        <td>Barra onde conta o tempo que resta para cada transição. Valor padrão "false".</td>
+    </tr>
+    <tr>    
+        <td>timerClock</td>
+        <td>boolean</td>
+        <td>Relógio onde conta o tempo que resta para cada transição. Valor padrão "true".</td>
+    </tr>
+    <tr>    
+        <td>timerClockSize</td>
+        <td>integer</td>
+        <td>Tamanho do relógio. Valor padrão "40".</td>
+    </tr>
+    <tr>    
+        <td>pagination</td>
+        <td>boolean</td>
+        <td>Serve para ativar ou desativar a paginação do plugin. Valor padrão "true".</td>
+    </tr>
+    <tr>    
+        <td>paginationThumb</td>
+        <td>boolean</td>
+        <td>Ativa o thumbnail da paginação. Valor padrão "false".</td>
+    </tr>
+    <tr>    
+        <td>thumbSizeWidth / thumbSizeHeight</td>
+        <td>integer</td>
+        <td>Tamanho das thumbnails da paginação. Valor padrão "150".</td>
+    </tr>
+    <tr>    
+        <td>paginationHover</td>
+        <td>boolean</td>
+        <td>Ativa o hover da paginação, mostrando a imagem do trigger correspondente. Valor padrão "true".</td>
+    </tr>
+    <tr>    
+        <td>paginationCounter</td>
+        <td>boolean</td>
+        <td>Serve para visualizar a posição da imagem atual e a quantidade de imagens no geral. Valor padrão "true".</td>
+    </tr>
+    <tr>    
+        <td>paginationCounterTab</td>
+        <td>string</td>
+        <td>Seve para custumizar a tab que divide os valores. Valor padrão "/".</td>
+    </tr>
+    <tr>    
+        <td>navButtons</td>
+        <td>boolean</td>
+        <td>Serve para ativar a navegação por setas. Valor padrão "true".</td>
+    </tr>
+    <tr>    
+        <td>prevName / nextName</td>
+        <td>string</td>
+        <td>Serve para custumizar o valor dos elementos. Valores padrão "".</td>
+    </tr>
+    <tr>    
+        <td>keyboard</td>
+        <td>boolean</td>
+        <td>Serve para ativar a navegação por teclado, utilizando as setas de navegação. Valor padrão "false".</td>
+    </tr>
+    <tr>    
+        <td>touch</td>
+        <td>boolean</td>
+        <td>Usado para facilitar a navegação em smartphones.<b>OBS: Ele não funciona em browsers do Windows Phone 8.</b> Valor padrão "false".</td>
+    </tr>
+    <tr>    
+        <td>thresholdX / thresholdY</td>
+        <td>integer</td>
+        <td>Serve para ajustar a sensibilidade dos touch. Valor padrão "100".</td>
+    </tr>
+    <tr>    
+        <td>touchName</td>
+        <td>string</td>
+        <td>Nome do contâiner em que o touch vai exercer a sua função de toque. Exemplo: o plugin está em uma tag com o id de "highlight". O touchName deve ter o seguinte valor: touchName: "#highlight".</td>
+    </tr>
+    <tr>    
+        <td>fullScreen</td>
+        <td>boolean</td>
+        <td>Ativa a função full screen do plugin. <b>OBS: Para que o fullScreen funcione, é preciso que a tag que envolve o plugin tenha as dimensões do tamanho da tela, ou que o plugin não esteja dentro de nenhuma tag.</b> Valor padrão "false".</td>
+    </tr>
+    <tr>    
+        <td>adjustmentSize</td>
+        <td>integer</td>
+        <td>Funciona em conjunto com a função fullScreen. Com ele você pode ajustar o tamanho do plugin com mais precisão, com isso, fazendo ajustes mais precisos caso precise. Valor padrão "0".</td>
+    </tr>
+    <tr>    
+        <td>responsive</td>
+        <td>boolean</td>
+        <td>Ativa a função responsiva. Valor padrão "true".</td>
+    </tr>
+  <tr>  
+    <td>concertinaMaxWidth</td>
+    <td>integer</td>
+    <td>Trabalha em conjunto com a opção de efeito "concertina". Com ele passamos o valor de abertuda da tag quando o mouse está na posição hover. <b>OBS: Esse valor é em porcento, ou seja, o seu valor máximo é de 100.</b> Valor padrão "64".</td>
+  </tr>
+  <tr>  
+    <td>concertinaAdjustmentFloat</td>
+    <td>string</td>
+    <td>Trabalha em conjunto com a opção de efeito "concertina". Com ele fazemos o ajuste do float na imagem, subitraindo ou almentando a distancia do float das imagens. Valor padrão "-0.5".</td>
+  </tr>
+  <tr>  
+    <td>heigthAuto</td>
+    <td>boolean</td>
+    <td>Trabalha em conjunto com a opção de efeito "slide". Com ele fazemos o ajuste da altura do plugin. Valor padrão "true".</td>
+  </tr>
+  <tr>  
+    <td>heigthAutoSpeed</td>
+    <td>number</td>
+    <td>Trabalha em conjunto com a opção de efeito "heigthAuto". Com ele fazemos o ajuste da velocidade do efeito. Valor padrão "300".</td>
+  </tr>
+</table>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/luizpaulo165/slideLp/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/luizpaulo165/slideLp/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/luizpaulo165/slideLp"></a> is maintained by <a href="https://github.com/luizpaulo165">luizpaulo165</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
